@@ -305,6 +305,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -333,23 +355,19 @@
 
       
         
-          
-            <p>飞行员兄弟”这个游戏，需要玩家顺利的打开一个拥有16个把手的冰箱。</p>
+          <p>飞行员兄弟”这个游戏，需要玩家顺利的打开一个拥有16个把手的冰箱。</p>
 <p>已知每个把手可以处于以下两种状态之一：打开或关闭。</p>
 <p>只有当所有把手都打开时，冰箱才会打开。</p>
 <p>把手可以表示为一个4х4的矩阵，您可以改变任何一个位置[i,j]上把手的状态。</p>
 <p>但是，这也会使得第i行和第j列上的所有把手的状态也随着改变。</p>
 <p>请你求出打开冰箱所需的切换把手的次数最小值是多少。</p>
-<p>##输入格式<br>输入一共包含四行，每行包含四个把手的初始状态。</p>
-<p>符号“+”表示把手处于闭合状态，而符号“-”表示把手处于打开状态。</p>
-<p>至少一个手柄的初始状态是关闭的。</p>
-<p>##输出格式<br>第一行输出一个整数N，表示所需的最小切换把手次数。</p>
-<p>接下来N行描述切换顺序，每行输入两个整数，代表被切换状态的把手的行号和列号，数字之间用空格隔开。</p>
-<p>注意：如果存在多种打开冰箱的方式，则按照优先级整体从上到下，同行从左到右打开。</p>
-<p>######思路：用二进制数表示每个位置的开关状态<br>######并定义一个二维数组，每当状态异或这个数组，便改变其对应行与列的状态</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> change[<span class="number">4</span>][<span class="number">4</span>];</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;PII;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getbit</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">4</span> * x + y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, j, k, state=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">string</span> a;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[j] == <span class="string">'+'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				state += <span class="number">1</span> &lt;&lt; getbit(i, j);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; <span class="number">4</span>; k++)</span><br><span class="line">			&#123;</span><br><span class="line">				change[i][j] += <span class="number">1</span> &lt;&lt; getbit(i, k);</span><br><span class="line">				change[i][j] += <span class="number">1</span> &lt;&lt; getbit(k, j);</span><br><span class="line">			&#125;</span><br><span class="line">			change[i][j] -= <span class="number">1</span> &lt;&lt; getbit(i, j);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">vector</span>&lt;PII&gt; path;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">1</span> &lt;&lt; <span class="number">16</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">vector</span>&lt;PII&gt; temp;</span><br><span class="line">		<span class="keyword">int</span> now = state;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">16</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (i &gt;&gt; j &amp; <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> x = j / <span class="number">4</span>;</span><br><span class="line">				<span class="keyword">int</span> y = j % <span class="number">4</span>;</span><br><span class="line">				now ^= change[x][y];</span><br><span class="line">				temp.push_back(&#123; x,y &#125;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (!now &amp;&amp; (path.empty()||path.size()&gt;temp.size())) </span><br><span class="line">			path = temp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; path.size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; path.size(); i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; path[i].first + <span class="number">1</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; path[i].second + <span class="number">1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/02/17/html-day01/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -691,7 +709,25 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
             
 
           </nav>
