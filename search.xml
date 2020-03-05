@@ -249,6 +249,28 @@
       </tags>
   </entry>
   <entry>
+    <title>2n皇后</title>
+    <url>/2020/02/17/8queen/</url>
+    <content><![CDATA[<a id="more"></a>
+
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定一个n*n的棋盘，棋盘中有一些位置不能放皇后。现在要向棋盘中放入n个黑皇后和 n个白皇后，使任意的两个黑皇后都不在同一行、同一列或同一条对角线上，任意的两个白皇后都不在同一行、同一列或同一条对角线上。问总共有多少种放法？n小于等于8</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入的第一行为一个整数n，表示棋盘的大小。<br>接下来n行，每行n个0或1的整数，如果一个整数为1，表示对应的位置可以放皇后，如果一个整数为0，表示对应的位置不可以放皇后。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示总共有多少种放法。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4</span><br><span class="line">1 1 1 1</span><br><span class="line">1 1 1 1</span><br><span class="line">1 1 1 1</span><br><span class="line">1 1 1 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
+<p>代码</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[<span class="number">8</span>][<span class="number">8</span>];</span><br><span class="line"><span class="keyword">int</span> n, ans;</span><br><span class="line"><span class="keyword">int</span> bqueenpos[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">int</span> wqueenpos[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">WQueen</span><span class="params">(<span class="keyword">int</span> k)</span><span class="comment">//摆放白皇后</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (k == n)</span><br><span class="line">		ans++;</span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (bqueenpos[k] == i||<span class="built_in">map</span>[k][i]==<span class="number">0</span>)<span class="comment">//与黑色查重</span></span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; k; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (wqueenpos[j] == i || <span class="built_in">abs</span>(wqueenpos[j] - i) == <span class="built_in">abs</span>(k - j))</span><br><span class="line">				<span class="keyword">break</span>;  <span class="comment">//与之前摆放的白色查重</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (j == k)</span><br><span class="line">		&#123;</span><br><span class="line">			wqueenpos[k] = i;</span><br><span class="line">			WQueen(k + <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BQueen</span><span class="params">(<span class="keyword">int</span> k)</span><span class="comment">//摆放黑皇后，k表示行</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (k == n)<span class="comment">//黑色摆放好</span></span><br><span class="line">	&#123;</span><br><span class="line">		WQueen(<span class="number">0</span>);<span class="comment">//开始摆放白</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)<span class="comment">//i枚举所有列</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">map</span>[k][i] == <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; k; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (bqueenpos[j] == i || <span class="built_in">abs</span>(bqueenpos[j] - i) == <span class="built_in">abs</span>(k - j))</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (j == k)<span class="comment">//不发生冲突</span></span><br><span class="line">		&#123;</span><br><span class="line">			bqueenpos[k] = i;<span class="comment">//记录位置</span></span><br><span class="line">			BQueen(k + <span class="number">1</span>);<span class="comment">//递归下一个位置</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; <span class="built_in">map</span>[i][j];</span><br><span class="line">	BQueen(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+        <tag>回溯</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>防晒 acwing 110</title>
     <url>/2020/02/17/ac110/</url>
     <content><![CDATA[<a id="more"></a>
@@ -280,25 +302,33 @@
       </tags>
   </entry>
   <entry>
-    <title>2n皇后</title>
-    <url>/2020/02/17/8queen/</url>
+    <title>小猫爬山 acwing 165</title>
+    <url>/2020/02/17/ac165/</url>
     <content><![CDATA[<a id="more"></a>
 
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定一个n*n的棋盘，棋盘中有一些位置不能放皇后。现在要向棋盘中放入n个黑皇后和 n个白皇后，使任意的两个黑皇后都不在同一行、同一列或同一条对角线上，任意的两个白皇后都不在同一行、同一列或同一条对角线上。问总共有多少种放法？n小于等于8</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入的第一行为一个整数n，表示棋盘的大小。<br>接下来n行，每行n个0或1的整数，如果一个整数为1，表示对应的位置可以放皇后，如果一个整数为0，表示对应的位置不可以放皇后。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示总共有多少种放法。</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4</span><br><span class="line">1 1 1 1</span><br><span class="line">1 1 1 1</span><br><span class="line">1 1 1 1</span><br><span class="line">1 1 1 1</span><br></pre></td></tr></table></figure>
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>翰翰和达达饲养了N只小猫，这天，小猫们要去爬山。</p>
+<p>经历了千辛万苦，小猫们终于爬上了山顶，但是疲倦的它们再也不想徒步走下山了（呜咕&gt;_&lt;）。</p>
+<p>翰翰和达达只好花钱让它们坐索道下山。</p>
+<p>索道上的缆车最大承重量为W，而N只小猫的重量分别是C1、C2……CN。</p>
+<p>当然，每辆缆车上的小猫的重量之和不能超过W。</p>
+<p>每租用一辆缆车，翰翰和达达就要付1美元，所以他们想知道，最少需要付多少美元才能把这N只小猫都运送下山？</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第1行：包含两个用空格隔开的整数，N和W。</p>
+<p>第2..N+1行：每行一个整数，其中第i+1行的整数表示第i只小猫的重量Ci。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示最少需要多少美元，也就是最少需要多少辆缆车。</p>
+<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>1≤N≤18,<br>1≤Ci≤W≤1E8</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">5 1996</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">1994</span><br><span class="line">12</span><br><span class="line">29</span><br></pre></td></tr></table></figure>
 
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.将猫的体重从大到小排序</span><br><span class="line">2.如果当前答案大于已知最小答案则立即回溯</span><br></pre></td></tr></table></figure>
 <p>代码</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[<span class="number">8</span>][<span class="number">8</span>];</span><br><span class="line"><span class="keyword">int</span> n, ans;</span><br><span class="line"><span class="keyword">int</span> bqueenpos[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">int</span> wqueenpos[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">WQueen</span><span class="params">(<span class="keyword">int</span> k)</span><span class="comment">//摆放白皇后</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (k == n)</span><br><span class="line">		ans++;</span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (bqueenpos[k] == i||<span class="built_in">map</span>[k][i]==<span class="number">0</span>)<span class="comment">//与黑色查重</span></span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; k; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (wqueenpos[j] == i || <span class="built_in">abs</span>(wqueenpos[j] - i) == <span class="built_in">abs</span>(k - j))</span><br><span class="line">				<span class="keyword">break</span>;  <span class="comment">//与之前摆放的白色查重</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (j == k)</span><br><span class="line">		&#123;</span><br><span class="line">			wqueenpos[k] = i;</span><br><span class="line">			WQueen(k + <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BQueen</span><span class="params">(<span class="keyword">int</span> k)</span><span class="comment">//摆放黑皇后，k表示行</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (k == n)<span class="comment">//黑色摆放好</span></span><br><span class="line">	&#123;</span><br><span class="line">		WQueen(<span class="number">0</span>);<span class="comment">//开始摆放白</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)<span class="comment">//i枚举所有列</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">map</span>[k][i] == <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; k; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (bqueenpos[j] == i || <span class="built_in">abs</span>(bqueenpos[j] - i) == <span class="built_in">abs</span>(k - j))</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (j == k)<span class="comment">//不发生冲突</span></span><br><span class="line">		&#123;</span><br><span class="line">			bqueenpos[k] = i;<span class="comment">//记录位置</span></span><br><span class="line">			BQueen(k + <span class="number">1</span>);<span class="comment">//递归下一个位置</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; <span class="built_in">map</span>[i][j];</span><br><span class="line">	BQueen(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, w, res = <span class="number">30</span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">20</span>], a[<span class="number">20</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> cur, <span class="keyword">int</span> cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (res &lt;= cnt) <span class="comment">//剪枝2</span></span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (cur == n)</span><br><span class="line">	&#123;</span><br><span class="line">		res = min(res, cnt);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= cnt; i++)<span class="comment">//遍历所有的车</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (f[i] + a[cur] &lt;= w)</span><br><span class="line">		&#123;</span><br><span class="line">			f[i] += a[cur];</span><br><span class="line">			dfs(cur + <span class="number">1</span>, cnt);</span><br><span class="line">			f[i] -= a[cur];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//未返回说明当前车不够，需再加车</span></span><br><span class="line">	f[cnt + <span class="number">1</span>] = a[cur];</span><br><span class="line">	dfs(cur + <span class="number">1</span>, cnt + <span class="number">1</span>);</span><br><span class="line">	f[cnt + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; w;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	sort(a, a + n, cmp);<span class="comment">//剪枝1</span></span><br><span class="line">	dfs(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; res + <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法竞赛</category>
       </categories>
       <tags>
-        <tag>递归</tag>
-        <tag>回溯</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -360,6 +390,65 @@
       </tags>
   </entry>
   <entry>
+    <title>加成序列 acwing 170</title>
+    <url>/2020/02/17/ac170/</url>
+    <content><![CDATA[<a id="more"></a>
+
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>满足如下条件的序列X（序列中元素被标号为1、2、3…m）被称为“加成序列”：</p>
+<p>1、X[1]=1</p>
+<p>2、X[m]=n</p>
+<p>3、X[1]&lt;X[2]&lt;…&lt;X[m-1]&lt;X[m]</p>
+<p>4、对于每个 k（2≤k≤m）都存在两个整数 i 和 j （1≤i,j≤k−1，i 和 j 可相等），使得X[k]=X[i]+X[j]。</p>
+<p>你的任务是：给定一个整数n，找出符合上述条件的长度m最小的“加成序列”。</p>
+<p>如果有多个满足要求的答案，只需要找出任意一个可行解。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入包含多组测试用例。</p>
+<p>每组测试用例占据一行，包含一个整数n。</p>
+<p>当输入为单行的0时，表示输入结束。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每个测试用例，输出一个满足需求的整数序列，数字之间用空格隔开。</p>
+<p>每个输出占一行。</p>
+<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤n≤100</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">5</span><br><span class="line">7</span><br><span class="line">12</span><br><span class="line">15</span><br><span class="line">77</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 2 4 5</span><br><span class="line">1 2 4 6 7</span><br><span class="line">1 2 4 8 12</span><br><span class="line">1 2 4 5 10 15</span><br><span class="line">1 2 4 8 9 17 34 68 77</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="迭代加深"><a href="#迭代加深" class="headerlink" title="迭代加深"></a>迭代加深</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">由题意，再经稍加推算已知100以内的数的迭代序列长度不会超过10，</span><br><span class="line">所以这里可以用迭代加深的思想，一层一层地向下搜索</span><br></pre></td></tr></table></figure>
+
+<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.从大到小枚举</span><br><span class="line">2.值相同的元素不用再次搜索</span><br></pre></td></tr></table></figure>
+
+
+
+<p>代码</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">110</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span>  a[N];</span><br><span class="line"><span class="keyword">int</span> jud[N];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> depth)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (now == depth)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[now - <span class="number">1</span>] == n)</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memset</span>(jud, <span class="number">0</span>, <span class="keyword">sizeof</span>(jud));<span class="comment">//每次进入都要初始化一次</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = now - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)<span class="comment">//剪枝1</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span>  t = a[i] + a[j];</span><br><span class="line">			<span class="keyword">if</span> (!jud[t] &amp;&amp; t &lt;= n &amp;&amp; t &gt; a[now - <span class="number">1</span>])<span class="comment">//剪枝2</span></span><br><span class="line">			&#123;</span><br><span class="line">				jud[t] = <span class="number">1</span>;</span><br><span class="line">				a[now] = t;</span><br><span class="line">				<span class="keyword">if</span> (dfs(now + <span class="number">1</span>, depth))</span><br><span class="line">					<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n, n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> depth = <span class="number">1</span>;</span><br><span class="line">		a[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span> (!dfs(<span class="number">1</span>, depth))<span class="comment">//迭代加深</span></span><br><span class="line">		&#123;</span><br><span class="line">			depth++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; depth; i++)</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>dfs</tag>
+        <tag>迭代加深</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>递归实现指数型枚举 acwing 92</title>
+    <url>/2020/02/17/digui1/</url>
+    <content><![CDATA[<a id="more"></a>
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>从 1~n 这 n 个整数中随机选取任意多个，输出所有可能的选择方案。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一个整数n。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>每行输出一种方案。<br>同一行内的数必须升序排列，相邻两个数用恰好1个空格隔开。<br>对于没有选任何数的方案，输出空行。<br>本题有自定义校验器（SPJ），各行（不同方案）之间的顺序任意。</p>
+<!--more-->
+<p>思路：用二进制数表示每个数的选择情况<br>通过移位运算来枚举所有情况</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> state)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (now &gt; n) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (now == n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (state &gt;&gt; i &amp; <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(now + <span class="number">1</span>, (state &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>); <span class="comment">//选择第now个数</span></span><br><span class="line">	dfs(now + <span class="number">1</span>, state &lt;&lt; <span class="number">1</span>);       <span class="comment">//不选第now个数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	dfs(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+        <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>生日蛋糕 acwing 168</title>
     <url>/2020/02/17/ac168/</url>
     <content><![CDATA[<a id="more"></a>
@@ -392,71 +481,6 @@
       </tags>
   </entry>
   <entry>
-    <title>小猫爬山 acwing 165</title>
-    <url>/2020/02/17/ac165/</url>
-    <content><![CDATA[<a id="more"></a>
-
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>翰翰和达达饲养了N只小猫，这天，小猫们要去爬山。</p>
-<p>经历了千辛万苦，小猫们终于爬上了山顶，但是疲倦的它们再也不想徒步走下山了（呜咕&gt;_&lt;）。</p>
-<p>翰翰和达达只好花钱让它们坐索道下山。</p>
-<p>索道上的缆车最大承重量为W，而N只小猫的重量分别是C1、C2……CN。</p>
-<p>当然，每辆缆车上的小猫的重量之和不能超过W。</p>
-<p>每租用一辆缆车，翰翰和达达就要付1美元，所以他们想知道，最少需要付多少美元才能把这N只小猫都运送下山？</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第1行：包含两个用空格隔开的整数，N和W。</p>
-<p>第2..N+1行：每行一个整数，其中第i+1行的整数表示第i只小猫的重量Ci。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示最少需要多少美元，也就是最少需要多少辆缆车。</p>
-<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>1≤N≤18,<br>1≤Ci≤W≤1E8</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">5 1996</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">1994</span><br><span class="line">12</span><br><span class="line">29</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
-
-<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.将猫的体重从大到小排序</span><br><span class="line">2.如果当前答案大于已知最小答案则立即回溯</span><br></pre></td></tr></table></figure>
-<p>代码</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, w, res = <span class="number">30</span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">20</span>], a[<span class="number">20</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> cur, <span class="keyword">int</span> cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (res &lt;= cnt) <span class="comment">//剪枝2</span></span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (cur == n)</span><br><span class="line">	&#123;</span><br><span class="line">		res = min(res, cnt);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= cnt; i++)<span class="comment">//遍历所有的车</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (f[i] + a[cur] &lt;= w)</span><br><span class="line">		&#123;</span><br><span class="line">			f[i] += a[cur];</span><br><span class="line">			dfs(cur + <span class="number">1</span>, cnt);</span><br><span class="line">			f[i] -= a[cur];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//未返回说明当前车不够，需再加车</span></span><br><span class="line">	f[cnt + <span class="number">1</span>] = a[cur];</span><br><span class="line">	dfs(cur + <span class="number">1</span>, cnt + <span class="number">1</span>);</span><br><span class="line">	f[cnt + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; w;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	sort(a, a + n, cmp);<span class="comment">//剪枝1</span></span><br><span class="line">	dfs(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; res + <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法竞赛</category>
-      </categories>
-      <tags>
-        <tag>dfs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>加成序列 acwing 170</title>
-    <url>/2020/02/17/ac170/</url>
-    <content><![CDATA[<a id="more"></a>
-
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>满足如下条件的序列X（序列中元素被标号为1、2、3…m）被称为“加成序列”：</p>
-<p>1、X[1]=1</p>
-<p>2、X[m]=n</p>
-<p>3、X[1]&lt;X[2]&lt;…&lt;X[m-1]&lt;X[m]</p>
-<p>4、对于每个 k（2≤k≤m）都存在两个整数 i 和 j （1≤i,j≤k−1，i 和 j 可相等），使得X[k]=X[i]+X[j]。</p>
-<p>你的任务是：给定一个整数n，找出符合上述条件的长度m最小的“加成序列”。</p>
-<p>如果有多个满足要求的答案，只需要找出任意一个可行解。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入包含多组测试用例。</p>
-<p>每组测试用例占据一行，包含一个整数n。</p>
-<p>当输入为单行的0时，表示输入结束。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每个测试用例，输出一个满足需求的整数序列，数字之间用空格隔开。</p>
-<p>每个输出占一行。</p>
-<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤n≤100</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">5</span><br><span class="line">7</span><br><span class="line">12</span><br><span class="line">15</span><br><span class="line">77</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 2 4 5</span><br><span class="line">1 2 4 6 7</span><br><span class="line">1 2 4 8 12</span><br><span class="line">1 2 4 5 10 15</span><br><span class="line">1 2 4 8 9 17 34 68 77</span><br></pre></td></tr></table></figure>
-
-<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.从体积大的盘子搜到体积小的盘子</span><br><span class="line">2.通过数学推导缩小上下界</span><br><span class="line">3.当前体积+剩余可能最小体积&gt;n,返回</span><br><span class="line">4.当前面积+剩余可能最优面积&gt;ans,返回</span><br><span class="line">5.数学剪枝,2(n-v)&#x2F;r[dep] +s &gt;ans,返回</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">代码</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;cpp</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxx &#x3D; 0x7ffff;</span><br><span class="line">int n, m;</span><br><span class="line">int minv[30], mins[30];</span><br><span class="line">int h[30], r[30], ans &#x3D; maxx;</span><br><span class="line">int v, s;</span><br><span class="line"></span><br><span class="line">void dfs(int dep)</span><br><span class="line">&#123;</span><br><span class="line">	if (!dep)</span><br><span class="line">	&#123;</span><br><span class="line">		if (v &#x3D;&#x3D; n)</span><br><span class="line">			ans &#x3D; min(ans, s);</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	for (r[dep] &#x3D; min((int)sqrt(n - v), r[dep + 1] - 1); r[dep] &gt;&#x3D; dep; r[dep]--)&#x2F;&#x2F;剪枝1，2</span><br><span class="line">	&#123;</span><br><span class="line">		for (h[dep] &#x3D; min((int)((double)(n - v) &#x2F; (r[dep] * r[dep])), h[dep + 1] - 1); h[dep] &gt;&#x3D; dep; h[dep]--)</span><br><span class="line">		&#123;</span><br><span class="line">			if (v + minv[dep] &gt; n) continue;&#x2F;&#x2F;剪枝3</span><br><span class="line">			if (s + mins[dep] &gt; ans) continue;&#x2F;&#x2F;剪枝4</span><br><span class="line">			if (2 * (n - v) &#x2F; r[dep] + s &gt; ans) continue;&#x2F;&#x2F;剪枝5</span><br><span class="line">			if (dep &#x3D;&#x3D; m) s +&#x3D; r[dep] * r[dep];</span><br><span class="line">			s +&#x3D; 2 * r[dep] * h[dep];</span><br><span class="line">			v +&#x3D; r[dep] * r[dep] * h[dep];</span><br><span class="line">			dfs(dep - 1);</span><br><span class="line">			if (dep &#x3D;&#x3D; m) s -&#x3D; r[dep] * r[dep];</span><br><span class="line">			s -&#x3D; 2 * r[dep] * h[dep];</span><br><span class="line">			v -&#x3D; r[dep] * r[dep] * h[dep];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	for (int i &#x3D; 1; i &lt;&#x3D; m; i++)&#x2F;&#x2F;求出剩下部分可能的最小值</span><br><span class="line">	&#123;</span><br><span class="line">		minv[i] &#x3D; minv[i - 1] + i * i * i;</span><br><span class="line">		mins[i] &#x3D; mins[i - 1] + i * i * 2;</span><br><span class="line">	&#125;</span><br><span class="line">	h[m + 1] &#x3D; r[m + 1] &#x3D; maxx;</span><br><span class="line">	dfs(m);</span><br><span class="line">	if (ans &#x3D;&#x3D; maxx)</span><br><span class="line">		cout &lt;&lt; &quot;0&quot; &lt;&lt; endl;</span><br><span class="line">	else</span><br><span class="line">		cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法竞赛</category>
-      </categories>
-      <tags>
-        <tag>dfs</tag>
-        <tag>迭代加深</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>递归实现组合型枚举 acwing 93</title>
     <url>/2020/02/17/digui2/</url>
     <content><![CDATA[<a id="more"></a>
@@ -471,6 +495,23 @@
       <tags>
         <tag>递归</tag>
         <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>递归实现排列型枚举 acwing 94</title>
+    <url>/2020/02/17/digui3/</url>
+    <content><![CDATA[<a id="more"></a>
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>把 1~n 这 n 个整数排成一行后随机打乱顺序，输出所有可能的次序。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一个整数n。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>按照从小到大的顺序输出所有方案，每行1个。<br>首先，同一行相邻两个数用一个空格隔开。<br>其次，对于两个不同的行，对应下标的数一一比较，字典序较小的排在前面<br>思路：dfs</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> b[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> n,j;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (j == n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; k++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; a[k] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!b[i])</span><br><span class="line">        &#123;</span><br><span class="line">            b[i] = <span class="number">1</span>;</span><br><span class="line">            a[j] = i;</span><br><span class="line">            j++;</span><br><span class="line">            dfs();</span><br><span class="line">            j--;</span><br><span class="line">            a[j] = <span class="number">0</span>;</span><br><span class="line">            b[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    dfs();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+        <tag>枚举</tag>
       </tags>
   </entry>
   <entry>
@@ -495,42 +536,6 @@
       <tags>
         <tag>位运算</tag>
         <tag>状态压缩dp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>递归实现排列型枚举 acwing 94</title>
-    <url>/2020/02/17/digui3/</url>
-    <content><![CDATA[<a id="more"></a>
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>把 1~n 这 n 个整数排成一行后随机打乱顺序，输出所有可能的次序。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一个整数n。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>按照从小到大的顺序输出所有方案，每行1个。<br>首先，同一行相邻两个数用一个空格隔开。<br>其次，对于两个不同的行，对应下标的数一一比较，字典序较小的排在前面<br>思路：dfs</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> b[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> n,j;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (j == n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; k++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; a[k] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!b[i])</span><br><span class="line">        &#123;</span><br><span class="line">            b[i] = <span class="number">1</span>;</span><br><span class="line">            a[j] = i;</span><br><span class="line">            j++;</span><br><span class="line">            dfs();</span><br><span class="line">            j--;</span><br><span class="line">            a[j] = <span class="number">0</span>;</span><br><span class="line">            b[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    dfs();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法竞赛</category>
-      </categories>
-      <tags>
-        <tag>递归</tag>
-        <tag>枚举</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>递归实现指数型枚举 acwing 92</title>
-    <url>/2020/02/17/digui1/</url>
-    <content><![CDATA[<a id="more"></a>
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>从 1~n 这 n 个整数中随机选取任意多个，输出所有可能的选择方案。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一个整数n。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>每行输出一种方案。<br>同一行内的数必须升序排列，相邻两个数用恰好1个空格隔开。<br>对于没有选任何数的方案，输出空行。<br>本题有自定义校验器（SPJ），各行（不同方案）之间的顺序任意。</p>
-<!--more-->
-<p>思路：用二进制数表示每个数的选择情况<br>通过移位运算来枚举所有情况</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> state)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (now &gt; n) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (now == n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (state &gt;&gt; i &amp; <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(now + <span class="number">1</span>, (state &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>); <span class="comment">//选择第now个数</span></span><br><span class="line">	dfs(now + <span class="number">1</span>, state &lt;&lt; <span class="number">1</span>);       <span class="comment">//不选第now个数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	dfs(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法竞赛</category>
-      </categories>
-      <tags>
-        <tag>递归</tag>
-        <tag>位运算</tag>
       </tags>
   </entry>
   <entry>
