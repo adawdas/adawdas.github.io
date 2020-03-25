@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="trie," />
+  <meta name="keywords" content="并查集," />
 
 
 
@@ -105,17 +105,17 @@
 
 
 
-<meta name="description" content="题目描述：给定一个树，树上的边都具有权值。 树中一条路径的异或长度被定义为路径上所有边的权值的异或和 给定上述的具有n个节点的树，你能找到异或长度最大的路径吗？ 输入格式第一行包含整数n，表示树的节点数目。 接下来n-1行，每行包括三个整数u，v，w，表示节点u和节点v之间有一条边权重为w。 输出格式输出一个整数，表示异或长度最大的路径的最大异或和。 数据范围1≤n≤100000,0≤u,v,">
+<meta name="description" content="题目描述：有一个划分为N列的星际战场，各列依次编号为1,2,…,N。 有N艘战舰，也依次编号为1,2,…,N,其中第i号战舰处于第i列。 有T条指令，每条指令格式为以下两种之一： 1、M i j，表示让第i号战舰所在列的全部战舰保持原有顺序，接在第j号战舰所在列的尾部。 2、C i j，表示询问第i号战舰与第j号战舰当前是否处于同一列中，如果在同一列中，它们之间间隔了多少艘战舰。 现在需要你编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="最长异或值路径 acwing 144">
-<meta property="og:url" content="http://yoursite.com/2020/03/17/ac144/index.html">
+<meta property="og:title" content="银河英雄传说 acwing 238">
+<meta property="og:url" content="http://yoursite.com/2020/03/25/ac238/index.html">
 <meta property="og:site_name" content="Adawdas">
-<meta property="og:description" content="题目描述：给定一个树，树上的边都具有权值。 树中一条路径的异或长度被定义为路径上所有边的权值的异或和 给定上述的具有n个节点的树，你能找到异或长度最大的路径吗？ 输入格式第一行包含整数n，表示树的节点数目。 接下来n-1行，每行包括三个整数u，v，w，表示节点u和节点v之间有一条边权重为w。 输出格式输出一个整数，表示异或长度最大的路径的最大异或和。 数据范围1≤n≤100000,0≤u,v,">
+<meta property="og:description" content="题目描述：有一个划分为N列的星际战场，各列依次编号为1,2,…,N。 有N艘战舰，也依次编号为1,2,…,N,其中第i号战舰处于第i列。 有T条指令，每条指令格式为以下两种之一： 1、M i j，表示让第i号战舰所在列的全部战舰保持原有顺序，接在第j号战舰所在列的尾部。 2、C i j，表示询问第i号战舰与第j号战舰当前是否处于同一列中，如果在同一列中，它们之间间隔了多少艘战舰。 现在需要你编">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-17T11:50:33.000Z">
-<meta property="article:modified_time" content="2020-03-18T02:53:16.712Z">
+<meta property="article:published_time" content="2020-03-25T10:13:29.000Z">
+<meta property="article:modified_time" content="2020-03-25T08:27:48.548Z">
 <meta property="article:author" content="adawdas">
-<meta property="article:tag" content="trie">
+<meta property="article:tag" content="并查集">
 <meta name="twitter:card" content="summary">
 
 
@@ -146,13 +146,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/17/ac144/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/25/ac238/"/>
 
 
 
 
 
-  <title>最长异或值路径 acwing 144 | Adawdas</title>
+  <title>银河英雄传说 acwing 238 | Adawdas</title>
   
 
 
@@ -293,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/ac144/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/ac238/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="adawdas">
@@ -310,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">最长异或值路径 acwing 144</h1>
+          <h1 class="post-title" itemprop="name headline">银河英雄传说 acwing 238</h1>
         
 
         <div class="post-meta">
@@ -322,8 +322,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-17T19:50:33+08:00">
-                2020-03-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-25T18:13:29+08:00">
+                2020-03-25
               </time>
             
 
@@ -384,22 +384,40 @@
       
         <a id="more"></a>
 
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定一个树，树上的边都具有权值。</p>
-<p>树中一条路径的异或长度被定义为路径上所有边的权值的异或和</p>
-<p>给定上述的具有n个节点的树，你能找到异或长度最大的路径吗？</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行包含整数n，表示树的节点数目。</p>
-<p>接下来n-1行，每行包括三个整数u，v，w，表示节点u和节点v之间有一条边权重为w。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示异或长度最大的路径的最大异或和。</p>
-<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>1≤n≤100000,<br>0≤u,v,w&lt; n<br>0≤w&lt;2^31</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">0 1 3</span><br><span class="line">1 2 4</span><br><span class="line">1 3 6</span><br></pre></td></tr></table></figure>
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>有一个划分为N列的星际战场，各列依次编号为1,2,…,N。</p>
+<p>有N艘战舰，也依次编号为1,2,…,N,其中第i号战舰处于第i列。</p>
+<p>有T条指令，每条指令格式为以下两种之一：</p>
+<p>1、M i j，表示让第i号战舰所在列的全部战舰保持原有顺序，接在第j号战舰所在列的尾部。</p>
+<p>2、C i j，表示询问第i号战舰与第j号战舰当前是否处于同一列中，如果在同一列中，它们之间间隔了多少艘战舰。</p>
+<p>现在需要你编写一个程序，处理一系列的指令。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行包含整数T，表示共有T条指令。</p>
+<p>接下来T行，每行一个指令，指令有两种形式：M i j或C i j。</p>
+<p>其中M和C为大写字母表示指令类型，i和j为整数，表示指令涉及的战舰编号。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>你的程序应当依次对输入的每一条指令进行分析和处理：</p>
+<p>如果是M i j形式，则表示舰队排列发生了变化，你的程序要注意到这一点，但是不要输出任何信息；</p>
+<p>如果是C i j形式，你的程序要输出一行，仅包含一个整数，表示在同一列上，第i号战舰与第j号战舰之间布置的战舰数目，如果第i号战舰与第j号战舰当前不在同一列上，则输出-1。</p>
+<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>N≤30000,T≤500000</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">M 2 3</span><br><span class="line">C 1 2</span><br><span class="line">M 2 4</span><br><span class="line">C 4 2</span><br></pre></td></tr></table></figure>
 
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7</span><br></pre></td></tr></table></figure>
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-1</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
 
-<h3 id="trie-数组模拟邻接表"><a href="#trie-数组模拟邻接表" class="headerlink" title="trie + 数组模拟邻接表"></a>trie + 数组模拟邻接表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">首先，由异或的性质易知，树上任意两点路径上所有点的异或值等于这两个点分别到根节点的路径的异或值相异或</span><br><span class="line"></span><br><span class="line">之后，用数组模拟邻接表的方式模拟出题中的数据结构，并遍历一遍，统计出每个节点到根节点路径的异或值</span><br><span class="line"></span><br><span class="line">最后，问题转化为了上一题，用同样的方法求解即可</span><br></pre></td></tr></table></figure>
+<h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3><p>1.并查集的存储<br>使用一个数组fa保存父节点（根的父节点设为自己）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> fa[SIZE];</span><br></pre></td></tr></table></figure>
+
+<p>2.并查集的初始化</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) fa[i]=i;</span><br></pre></td></tr></table></figure>
+<p>3.并查集的get操作<br>若x是树根，则x就是集合代表，否则递归访问fa[x]直至根节点</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==fa[x]) <span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">return</span> fa[x]=get(fa[x]);<span class="comment">//路径压缩</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.并查集的Merge操作<br>合并元素x和元素y所在的集合，等价于让x的树根作为y的树根的子节点</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	fa[get(x)]=get(y)l</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 
 
 <p>代码</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100010</span>, M=<span class="number">3000000</span>;</span><br><span class="line"><span class="keyword">int</span> a[N], f[M][<span class="number">2</span>], n, idx;</span><br><span class="line"><span class="keyword">int</span> h[N], e[N*<span class="number">2</span>], c[N*<span class="number">2</span>], ne[N*<span class="number">2</span>], cnt;</span><br><span class="line"><span class="comment">//无向图所以为N*2</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	e[cnt] = v, c[cnt] = w, ne[cnt] = h[u], h[u] = cnt++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> father, <span class="keyword">int</span> sum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	a[u] = sum;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = h[u]; ~i; i = ne[i])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> j = e[i];</span><br><span class="line">		<span class="keyword">if</span> (j != father) dfs(j, u, sum^c[i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> p = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">30</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> &amp;s = f[p][x &gt;&gt; i &amp; <span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span> (!s) s = ++idx;</span><br><span class="line">		p = s;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>, p = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">30</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> t = x &gt;&gt; i &amp; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (f[p][!t])</span><br><span class="line">		&#123;</span><br><span class="line">			res += (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">			p = f[p][!t];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			p = f[p][t];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> u, v, w;</span><br><span class="line">	<span class="built_in">memset</span>(h, <span class="number">-1</span>, <span class="keyword">sizeof</span>(h));</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v &gt;&gt; w;</span><br><span class="line">		add(u, v, w);</span><br><span class="line">		add(v, u, w);</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(<span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">		insert(a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		res = max(res, query(a[i]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">30010</span>;</span><br><span class="line"><span class="comment">//fa数组用于存储根节点</span></span><br><span class="line"><span class="comment">//d数组用于存储当前元素在当前列中前面元素的个数</span></span><br><span class="line"><span class="comment">//siz数组用于存储当前列元素的个数</span></span><br><span class="line"><span class="keyword">int</span> fa[N], d[N], siz[N];</span><br><span class="line"><span class="keyword">int</span> i, j, t;</span><br><span class="line"><span class="keyword">char</span> c;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (x == fa[x])</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">int</span> root = get(fa[x]);</span><br><span class="line">	d[x] += d[fa[x]];</span><br><span class="line">	fa[x] = root;</span><br><span class="line">	<span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x = get(x);</span><br><span class="line">	y = get(y);</span><br><span class="line">	fa[x] = y;</span><br><span class="line">	d[x] = siz[y];</span><br><span class="line">	siz[y] += siz[x];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">	getchar();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		fa[i] = i;</span><br><span class="line">		siz[i] = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%c%d%d"</span>, &amp;c, &amp;i, &amp;j);</span><br><span class="line">		getchar();</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">'M'</span>)</span><br><span class="line">			merge(i, j);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (get(i) == get(j))</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="built_in">fabs</span>(d[i] - d[j]) - <span class="number">1</span>;<span class="comment">//之间的元素不包含本身</span></span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"-1"</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.acwing.com/problem/content/238/" target="_blank" rel="noopener">原题链接</a></p>
 
       
     </div>
@@ -417,7 +435,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/trie/" rel="tag"> # trie</a>
+            <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag"> # 并查集</a>
           
         </div>
       
@@ -430,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/17/ac143/" rel="next" title="最大异或对 acwing 143">
-                <i class="fa fa-chevron-left"></i> 最大异或对 acwing 143
+              <a href="/2020/03/22/HDU1176/" rel="next" title="免费馅饼 HDU1176">
+                <i class="fa fa-chevron-left"></i> 免费馅饼 HDU1176
               </a>
             
           </div>
@@ -440,8 +458,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/03/18/changyongwz/" rel="prev" title="几个好网站">
-                几个好网站 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/25/ac241/" rel="prev" title="楼兰图腾 acwing 241">
+                楼兰图腾 acwing 241 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -576,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式"><span class="nav-number">3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围"><span class="nav-number">4.</span> <span class="nav-text">数据范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入样例："><span class="nav-number">4.1.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出样例："><span class="nav-number">4.2.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trie-数组模拟邻接表"><span class="nav-number">4.3.</span> <span class="nav-text">trie + 数组模拟邻接表</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式"><span class="nav-number">3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围"><span class="nav-number">4.</span> <span class="nav-text">数据范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入样例："><span class="nav-number">4.1.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出样例："><span class="nav-number">4.2.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并查集"><span class="nav-number">4.3.</span> <span class="nav-text">并查集</span></a></li></ol></li></ol></div>
             
 
           </div>

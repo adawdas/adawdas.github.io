@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>楼兰图腾 acwing 241</title>
+    <url>/2020/03/25/ac241/</url>
+    <content><![CDATA[<a id="more"></a>
+
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>在完成了分配任务之后，西部314来到了楼兰古城的西部。</p>
+<p>相传很久以前这片土地上(比楼兰古城还早)生活着两个部落，一个部落崇拜尖刀(‘V’)，一个部落崇拜铁锹(‘∧’)，他们分别用V和∧的形状来代表各自部落的图腾。</p>
+<p>西部314在楼兰古城的下面发现了一幅巨大的壁画，壁画上被标记出了N个点，经测量发现这N个点的水平位置和竖直位置是两两不同的。</p>
+<p>西部314认为这幅壁画所包含的信息与这N个点的相对位置有关，因此不妨设坐标分别为(1,y1),(2,y2),…,(n,yn),其中y1~yn是1到n的一个排列。<br>西部314打算研究这幅壁画中包含着多少个图腾。<br>如果三个点(i,yi),(j,yj),(k,yk)满足1 ≤ i &lt; j &lt; k ≤ n且yi &gt; yj,yj &lt; yk，则称这三个点构成V图腾;<br>如果三个点(i,yi),(j,yj),(k,yk)满足1 ≤ i &lt; j &lt; k ≤ n且yi &lt; yj,yj &gt; yk，则称这三个点构成∧图腾;<br>西部314想知道，这n个点中两个部落图腾的数目。</p>
+<p>因此，你需要编写一个程序来求出V的个数和∧的个数。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行一个数n。</p>
+<p>第二行是n个数，分别代表y1，y2,…,yn。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>两个数，中间用空格隔开，依次为V的个数和∧的个数。</p>
+<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>对于所有数据，n≤200000,且输出答案不会超过int64。<br>y1∼yn 是 1 到 n 的一个排列。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">5</span><br><span class="line">1 5 3 2 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h3><p>树状数组是一种基于二进制分解思想的数据结构，其基本用途是维护序列的前缀和。<br>对于给定的序列a，我们建立一个数组c，其中c[x]保存序列a的区间<br>[x-lowbit(x)+1,x]中所有数的和</p>
+<p>该数据结构满足一下性质：<br>1.每个内部检点c[x]保以它位根的子树中所有叶节点的和。<br>2.每个内部节点c[x]的子节点个数等于lowbit(x)的位数。<br>3.除树根外，每个内部节点c[x]的父节点是c[x+lowbit(x)]。<br>4.树的深度为O(log N)。</p>
+<p>树状数组支持的两个基本操作</p>
+<p>1.查询前缀和<br>若要计算[l,r]中的和，只需计算<code>ask(r)-ask(l-1)</code></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (; x; x -= lowbit(x))</span><br><span class="line">		ans += c[x];</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.单点增加：给序列中的一个数 <code>a[x]</code> 加上一个<code>y</code></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (; x &lt;= n; x += lowbit(x))</span><br><span class="line">		c[x] += y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原题思路</p>
+<p>左右各遍历一次数组，并计算出每个元素左右比它大的元素的个数即可</p>
+<p>代码</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;(-x)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">200010</span>;</span><br><span class="line">ll a[N], c[N], l[N], r[N];</span><br><span class="line">ll n, resl, resr;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(ll x, ll y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (; x &lt;= n; x += lowbit(x))</span><br><span class="line">		c[x] += y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">ask</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (; x; x -= lowbit(x))</span><br><span class="line">		ans += c[x];</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">counts</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//每个元素的权值为1</span></span><br><span class="line">		<span class="comment">//ask(a[i])表示在它左边的元素（也就是比它小的元素）的个数</span></span><br><span class="line">		<span class="comment">//ask(n)表示已经插入的总元素个数</span></span><br><span class="line">		l[i] = ask(n) - ask(a[i]);</span><br><span class="line">		add(a[i], <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="keyword">sizeof</span>(c));</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		r[i] = ask(n) - ask(a[i]);</span><br><span class="line">		add(a[i], <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>); </span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	counts();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		resl += l[i] * r[i];</span><br><span class="line">		resr += (i - <span class="number">1</span> - l[i])*(n - i - r[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; resl &lt;&lt; <span class="string">" "</span> &lt;&lt; resr &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.acwing.com/problem/content/241/" target="_blank" rel="noopener">原题链接</a></p>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>树状数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>银河英雄传说 acwing 238</title>
+    <url>/2020/03/25/ac238/</url>
+    <content><![CDATA[<a id="more"></a>
+
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>有一个划分为N列的星际战场，各列依次编号为1,2,…,N。</p>
+<p>有N艘战舰，也依次编号为1,2,…,N,其中第i号战舰处于第i列。</p>
+<p>有T条指令，每条指令格式为以下两种之一：</p>
+<p>1、M i j，表示让第i号战舰所在列的全部战舰保持原有顺序，接在第j号战舰所在列的尾部。</p>
+<p>2、C i j，表示询问第i号战舰与第j号战舰当前是否处于同一列中，如果在同一列中，它们之间间隔了多少艘战舰。</p>
+<p>现在需要你编写一个程序，处理一系列的指令。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行包含整数T，表示共有T条指令。</p>
+<p>接下来T行，每行一个指令，指令有两种形式：M i j或C i j。</p>
+<p>其中M和C为大写字母表示指令类型，i和j为整数，表示指令涉及的战舰编号。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>你的程序应当依次对输入的每一条指令进行分析和处理：</p>
+<p>如果是M i j形式，则表示舰队排列发生了变化，你的程序要注意到这一点，但是不要输出任何信息；</p>
+<p>如果是C i j形式，你的程序要输出一行，仅包含一个整数，表示在同一列上，第i号战舰与第j号战舰之间布置的战舰数目，如果第i号战舰与第j号战舰当前不在同一列上，则输出-1。</p>
+<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>N≤30000,T≤500000</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4</span><br><span class="line">M 2 3</span><br><span class="line">C 1 2</span><br><span class="line">M 2 4</span><br><span class="line">C 4 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-1</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3><p>1.并查集的存储<br>使用一个数组fa保存父节点（根的父节点设为自己）</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> fa[SIZE];</span><br></pre></td></tr></table></figure>
+
+<p>2.并查集的初始化</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) fa[i]=i;</span><br></pre></td></tr></table></figure>
+<p>3.并查集的get操作<br>若x是树根，则x就是集合代表，否则递归访问fa[x]直至根节点</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==fa[x]) <span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">return</span> fa[x]=get(fa[x]);<span class="comment">//路径压缩</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.并查集的Merge操作<br>合并元素x和元素y所在的集合，等价于让x的树根作为y的树根的子节点</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	fa[get(x)]=get(y)l</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>代码</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">30010</span>;</span><br><span class="line"><span class="comment">//fa数组用于存储根节点</span></span><br><span class="line"><span class="comment">//d数组用于存储当前元素在当前列中前面元素的个数</span></span><br><span class="line"><span class="comment">//siz数组用于存储当前列元素的个数</span></span><br><span class="line"><span class="keyword">int</span> fa[N], d[N], siz[N];</span><br><span class="line"><span class="keyword">int</span> i, j, t;</span><br><span class="line"><span class="keyword">char</span> c;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (x == fa[x])</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">int</span> root = get(fa[x]);</span><br><span class="line">	d[x] += d[fa[x]];</span><br><span class="line">	fa[x] = root;</span><br><span class="line">	<span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x = get(x);</span><br><span class="line">	y = get(y);</span><br><span class="line">	fa[x] = y;</span><br><span class="line">	d[x] = siz[y];</span><br><span class="line">	siz[y] += siz[x];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">	getchar();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		fa[i] = i;</span><br><span class="line">		siz[i] = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%c%d%d"</span>, &amp;c, &amp;i, &amp;j);</span><br><span class="line">		getchar();</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">'M'</span>)</span><br><span class="line">			merge(i, j);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (get(i) == get(j))</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="built_in">fabs</span>(d[i] - d[j]) - <span class="number">1</span>;<span class="comment">//之间的元素不包含本身</span></span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"-1"</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.acwing.com/problem/content/238/" target="_blank" rel="noopener">原题链接</a></p>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>并查集</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>免费馅饼 HDU1176</title>
     <url>/2020/03/22/HDU1176/</url>
     <content><![CDATA[<a id="more"></a>
