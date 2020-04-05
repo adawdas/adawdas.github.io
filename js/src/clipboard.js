@@ -158,7 +158,7 @@ function E () {
   // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
 }
 
-E.prototype = {
+/*E.prototype = {
   on: function (name, callback, ctx) {
     var e = this.e || (this.e = {});
 
@@ -216,7 +216,7 @@ E.prototype = {
 
     return this;
   }
-};
+};*/
 
 module.exports = E;
 module.exports.TinyEmitter = E;
