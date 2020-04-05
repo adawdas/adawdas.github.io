@@ -105,15 +105,15 @@
 
 
 
-<meta name="description" content="题目描述：有一个划分为N列的星际战场，各列依次编号为1,2,…,N。 有N艘战舰，也依次编号为1,2,…,N,其中第i号战舰处于第i列。 有T条指令，每条指令格式为以下两种之一： 1、M i j，表示让第i号战舰所在列的全部战舰保持原有顺序，接在第j号战舰所在列的尾部。 2、C i j，表示询问第i号战舰与第j号战舰当前是否处于同一列中，如果在同一列中，它们之间间隔了多少艘战舰。 现在需要你编">
+<meta name="description" content="原题链接：Acwing238">
 <meta property="og:type" content="article">
 <meta property="og:title" content="银河英雄传说 acwing 238">
 <meta property="og:url" content="http://yoursite.com/2020/03/25/ac238/index.html">
 <meta property="og:site_name" content="Adawdas">
-<meta property="og:description" content="题目描述：有一个划分为N列的星际战场，各列依次编号为1,2,…,N。 有N艘战舰，也依次编号为1,2,…,N,其中第i号战舰处于第i列。 有T条指令，每条指令格式为以下两种之一： 1、M i j，表示让第i号战舰所在列的全部战舰保持原有顺序，接在第j号战舰所在列的尾部。 2、C i j，表示询问第i号战舰与第j号战舰当前是否处于同一列中，如果在同一列中，它们之间间隔了多少艘战舰。 现在需要你编">
+<meta property="og:description" content="原题链接：Acwing238">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-25T10:13:29.000Z">
-<meta property="article:modified_time" content="2020-03-25T08:27:48.548Z">
+<meta property="article:modified_time" content="2020-04-05T07:54:38.221Z">
 <meta property="article:author" content="adawdas">
 <meta property="article:tag" content="并查集">
 <meta name="twitter:card" content="summary">
@@ -382,7 +382,8 @@
       
 
       
-        <a id="more"></a>
+        <p>原题链接：<a href="https://www.acwing.com/problem/content/238/" target="_blank" rel="noopener">Acwing238</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>有一个划分为N列的星际战场，各列依次编号为1,2,…,N。</p>
 <p>有N艘战舰，也依次编号为1,2,…,N,其中第i号战舰处于第i列。</p>
@@ -417,7 +418,6 @@
 
 <p>代码</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">30010</span>;</span><br><span class="line"><span class="comment">//fa数组用于存储根节点</span></span><br><span class="line"><span class="comment">//d数组用于存储当前元素在当前列中前面元素的个数</span></span><br><span class="line"><span class="comment">//siz数组用于存储当前列元素的个数</span></span><br><span class="line"><span class="keyword">int</span> fa[N], d[N], siz[N];</span><br><span class="line"><span class="keyword">int</span> i, j, t;</span><br><span class="line"><span class="keyword">char</span> c;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (x == fa[x])</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">int</span> root = get(fa[x]);</span><br><span class="line">	d[x] += d[fa[x]];</span><br><span class="line">	fa[x] = root;</span><br><span class="line">	<span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x = get(x);</span><br><span class="line">	y = get(y);</span><br><span class="line">	fa[x] = y;</span><br><span class="line">	d[x] = siz[y];</span><br><span class="line">	siz[y] += siz[x];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">	getchar();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		fa[i] = i;</span><br><span class="line">		siz[i] = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%c%d%d"</span>, &amp;c, &amp;i, &amp;j);</span><br><span class="line">		getchar();</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">'M'</span>)</span><br><span class="line">			merge(i, j);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (get(i) == get(j))</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="built_in">fabs</span>(d[i] - d[j]) - <span class="number">1</span>;<span class="comment">//之间的元素不包含本身</span></span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"-1"</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.acwing.com/problem/content/238/" target="_blank" rel="noopener">原题链接</a></p>
 
       
     </div>
@@ -539,7 +539,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

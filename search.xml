@@ -3,7 +3,8 @@
   <entry>
     <title>线段树的基本操作</title>
     <url>/2020/03/28/segmenttree/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>线段树的创建、单点修改、查询</p>
+<a id="more"></a>
 
 <h3 id="线段树的创建"><a href="#线段树的创建" class="headerlink" title="线段树的创建"></a>线段树的创建</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegmentTree</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> l, r;</span><br><span class="line">	<span class="keyword">int</span> dat;</span><br><span class="line">&#125;t[SIZE * <span class="number">4</span>] ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	t[p].l = l;</span><br><span class="line">	t[p].r = r;</span><br><span class="line">	<span class="keyword">if</span> (l == r)</span><br><span class="line">	&#123;</span><br><span class="line">		t[p].dat = a[l];</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	build(p * <span class="number">2</span>, l, mid);</span><br><span class="line">	build(p * <span class="number">2</span> + <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">	t[p].dat = max(t[p * <span class="number">2</span>].dat, t[p * <span class="number">2</span> + <span class="number">1</span>].dat);</span><br><span class="line">&#125;</span><br><span class="line">bulid(<span class="number">1</span>, <span class="number">1</span>, n);</span><br></pre></td></tr></table></figure>
 <h3 id="线段树的单点修改"><a href="#线段树的单点修改" class="headerlink" title="线段树的单点修改"></a>线段树的单点修改</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> x, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (t[p].l == t[p].r)</span><br><span class="line">	&#123;</span><br><span class="line">		t[p].dat = v;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid = t[p].l + t[p].r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span> (x &lt;= mid)</span><br><span class="line">		change(p * <span class="number">2</span>, x, v);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		change(p * <span class="number">2</span> + <span class="number">1</span>, x, v);</span><br><span class="line">	t[p].dat = max(t[p * <span class="number">2</span>].dat, t[p * <span class="number">2</span> + <span class="number">1</span>].dat);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">change(<span class="number">1</span>, x, v);</span><br></pre></td></tr></table></figure>
@@ -19,8 +20,8 @@
   <entry>
     <title>楼兰图腾 acwing 241</title>
     <url>/2020/03/25/ac241/</url>
-    <content><![CDATA[<a id="more"></a>
-
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/241/" target="_blank" rel="noopener">Acwing241</a></p>
+<a id="more"></a>
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>在完成了分配任务之后，西部314来到了楼兰古城的西部。</p>
 <p>相传很久以前这片土地上(比楼兰古城还早)生活着两个部落，一个部落崇拜尖刀(‘V’)，一个部落崇拜铁锹(‘∧’)，他们分别用V和∧的形状来代表各自部落的图腾。</p>
 <p>西部314在楼兰古城的下面发现了一幅巨大的壁画，壁画上被标记出了N个点，经测量发现这N个点的水平位置和竖直位置是两两不同的。</p>
@@ -47,7 +48,6 @@
 <p>左右各遍历一次数组，并计算出每个元素左右比它大的元素的个数即可</p>
 <p>代码</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;(-x)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">200010</span>;</span><br><span class="line">ll a[N], c[N], l[N], r[N];</span><br><span class="line">ll n, resl, resr;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(ll x, ll y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (; x &lt;= n; x += lowbit(x))</span><br><span class="line">		c[x] += y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">ask</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (; x; x -= lowbit(x))</span><br><span class="line">		ans += c[x];</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">counts</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//每个元素的权值为1</span></span><br><span class="line">		<span class="comment">//ask(a[i])表示在它左边的元素（也就是比它小的元素）的个数</span></span><br><span class="line">		<span class="comment">//ask(n)表示已经插入的总元素个数</span></span><br><span class="line">		l[i] = ask(n) - ask(a[i]);</span><br><span class="line">		add(a[i], <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="keyword">sizeof</span>(c));</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		r[i] = ask(n) - ask(a[i]);</span><br><span class="line">		add(a[i], <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>); </span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	counts();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		resl += l[i] * r[i];</span><br><span class="line">		resr += (i - <span class="number">1</span> - l[i])*(n - i - r[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; resl &lt;&lt; <span class="string">" "</span> &lt;&lt; resr &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.acwing.com/problem/content/241/" target="_blank" rel="noopener">原题链接</a></p>
 ]]></content>
       <categories>
         <category>算法竞赛</category>
@@ -59,7 +59,8 @@
   <entry>
     <title>银河英雄传说 acwing 238</title>
     <url>/2020/03/25/ac238/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/238/" target="_blank" rel="noopener">Acwing238</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>有一个划分为N列的星际战场，各列依次编号为1,2,…,N。</p>
 <p>有N艘战舰，也依次编号为1,2,…,N,其中第i号战舰处于第i列。</p>
@@ -94,7 +95,6 @@
 
 <p>代码</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">30010</span>;</span><br><span class="line"><span class="comment">//fa数组用于存储根节点</span></span><br><span class="line"><span class="comment">//d数组用于存储当前元素在当前列中前面元素的个数</span></span><br><span class="line"><span class="comment">//siz数组用于存储当前列元素的个数</span></span><br><span class="line"><span class="keyword">int</span> fa[N], d[N], siz[N];</span><br><span class="line"><span class="keyword">int</span> i, j, t;</span><br><span class="line"><span class="keyword">char</span> c;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (x == fa[x])</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">int</span> root = get(fa[x]);</span><br><span class="line">	d[x] += d[fa[x]];</span><br><span class="line">	fa[x] = root;</span><br><span class="line">	<span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x = get(x);</span><br><span class="line">	y = get(y);</span><br><span class="line">	fa[x] = y;</span><br><span class="line">	d[x] = siz[y];</span><br><span class="line">	siz[y] += siz[x];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">	getchar();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		fa[i] = i;</span><br><span class="line">		siz[i] = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%c%d%d"</span>, &amp;c, &amp;i, &amp;j);</span><br><span class="line">		getchar();</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">'M'</span>)</span><br><span class="line">			merge(i, j);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (get(i) == get(j))</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="built_in">fabs</span>(d[i] - d[j]) - <span class="number">1</span>;<span class="comment">//之间的元素不包含本身</span></span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"-1"</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.acwing.com/problem/content/238/" target="_blank" rel="noopener">原题链接</a></p>
 ]]></content>
       <categories>
         <category>算法竞赛</category>
@@ -106,7 +106,8 @@
   <entry>
     <title>免费馅饼 HDU1176</title>
     <url>/2020/03/22/HDU1176/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1176" target="_blank" rel="noopener">HDU1176</a></p>
+<a id="more"></a>
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>都说天上不会掉馅饼，但有一天gameboy正走在回家的小径上，忽然天上掉下大把大把的馅饼。说来gameboy的人品实在是太好了，这馅饼别处都不掉，就掉落在他身旁的10米范围内。馅饼如果掉在了地上当然就不能吃了，所以gameboy马上卸下身上的背包去接。但由于小径两侧都不能站人，所以他只能在小径上接。由于gameboy平时老呆在房间里玩游戏，虽然在游戏中是个身手敏捷的高手，但在现实中运动神经特别迟钝，每秒种只有在移动不超过一米的范围内接住坠落的馅饼。<br>为了使问题简化，假设在接下来的一段时间里，馅饼都掉落在0-10这11个位置。开始时gameboy站在5这个位置，因此在第一秒，他只能接到4,5,6这三个位置中其中一个位置上的馅饼。问gameboy最多可能接到多少个馅饼？（假设他的背包可以容纳无穷多个馅饼）</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入数据有多组。每组数据的第一行为以正整数n(0&lt; n &lt;100000)，表示有n个馅饼掉在这条小径上。在结下来的n行中，每行有两个整数x,T(0&lt;T&lt;100000),表示在第T秒有一个馅饼掉在x点上。同一秒钟在同一点上可能掉下多个馅饼。n=0时输入结束。</p>
 <p>n=0表示数据结束。</p>
@@ -117,7 +118,6 @@
 
 <h3 id="dp"><a href="#dp" class="headerlink" title="dp"></a>dp</h3><p>首先记录每一秒的掉落情况<br>dp[t][x] 为第t秒在x出所能获得的最的馅饼数量<br>转移方程为:<br>dp[t][x]  += max3(dp[t+1][x],dp[t+1][x-1],dp[t+1][x+1]);</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">100010</span>][<span class="number">20</span>];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> x, t, T;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n, n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="keyword">sizeof</span>(f));</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; x &gt;&gt; t;</span><br><span class="line">			f[t][x]++;</span><br><span class="line">			T = max(T, t);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = T; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">10</span>; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"?"</span> &lt;&lt; f[<span class="number">3</span>][<span class="number">-1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"!="</span> &lt;&lt; f[i + <span class="number">1</span>][j - <span class="number">1</span>]&lt;&lt;<span class="string">"  i="</span>&lt;&lt;i&lt;&lt;<span class="string">"  j-1="</span>&lt;&lt;j<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">				f[i][j] += max(max(f[i + <span class="number">1</span>][j], f[i + <span class="number">1</span>][j - <span class="number">1</span>]), f[i + <span class="number">1</span>][j + <span class="number">1</span>]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; f[<span class="number">0</span>][<span class="number">5</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1176" target="_blank" rel="noopener">原题链接</a></p>
 ]]></content>
       <categories>
         <category>算法竞赛</category>
@@ -129,7 +129,8 @@
   <entry>
     <title>离散化</title>
     <url>/2020/03/22/lisanhua/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>离散化的两种方法</p>
+<a id="more"></a>
 
 
 
@@ -149,7 +150,8 @@
   <entry>
     <title>P1496 火烧赤壁</title>
     <url>/2020/03/22/P1494/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.luogu.com.cn/problem/P1496" target="_blank" rel="noopener">P1496</a></p>
+<a id="more"></a>
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>曹操平定北方以后，公元 208 年，率领大军南下，进攻刘表。他的人马还没有到荆州，刘表已经病死。他的儿子刘琮听到曹军声势浩大，吓破了胆，先派人求降了。</p>
 <p>孙权任命周瑜为都督，拨给他三万水军，叫他同刘备协力抵抗曹操。</p>
 <p>隆冬的十一月，天气突然回暖，刮起了东南风。</p>
@@ -164,7 +166,6 @@
 <h3 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h3><p>先将所有的坐标全都加入一个新的数组中去，再对其进行离散化</p>
 <p>因左端点一定先于右端点出现，任意区间左端点数&gt;=右端点数<br>遍历数组，若某一段内<br>左端点数&gt;右端点数      下一段有效<br>左端点数=右端点数      下一段无效</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, l[<span class="number">30000</span>], r[<span class="number">30000</span>], x[<span class="number">40010</span>], add[<span class="number">40010</span>];</span><br><span class="line"><span class="keyword">int</span> cnt, temp, res;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; l[i] &gt;&gt; r[i];</span><br><span class="line">		x[++cnt] = l[i];</span><br><span class="line">		x[++cnt] = r[i];</span><br><span class="line">	&#125;</span><br><span class="line">	sort(x + <span class="number">1</span>, x + <span class="number">1</span> + cnt);</span><br><span class="line">	<span class="comment">//unique函数用于将有序数组的非重复元素取出并放在前面</span></span><br><span class="line">	<span class="comment">//返回值为最后一个非重复元素的地址</span></span><br><span class="line">	cnt = unique(x + <span class="number">1</span>, x + <span class="number">1</span> + n) - (x + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//lower_bound(起始地址，结束地址，要查找的数值) 返回的是数值 第一个 出现的位置。</span></span><br><span class="line">		<span class="comment">//upper_bound(起始地址，结束地址，要查找的数值) 返回的是数值 最后一个 出现的位置。</span></span><br><span class="line">		<span class="comment">//binary_search(起始地址，结束地址，要查找的数值)  返回的是是否存在这么一个数，是一个bool值。</span></span><br><span class="line">		<span class="keyword">int</span> ll = lower_bound(x + <span class="number">1</span>, x + cnt + <span class="number">1</span>, l[i]) - x;</span><br><span class="line">		<span class="keyword">int</span> rr = lower_bound(x + <span class="number">1</span>, x + cnt + <span class="number">1</span>, r[i]) - x;</span><br><span class="line">		add[ll]++;</span><br><span class="line">		add[rr]--;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		temp += add[i];</span><br><span class="line">		<span class="keyword">if</span> (temp &gt; <span class="number">0</span>)</span><br><span class="line">			res += (x[i + <span class="number">1</span>] - x[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.luogu.com.cn/problem/P1496" target="_blank" rel="noopener">原题链接</a></p>
 ]]></content>
       <categories>
         <category>算法竞赛</category>
@@ -176,7 +177,8 @@
   <entry>
     <title>饭卡 HDU2546</title>
     <url>/2020/03/22/HDU2546/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2546" target="_blank" rel="noopener">HDU2546</a></p>
+<a id="more"></a>
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>电子科大本部食堂的饭卡有一种很诡异的设计，即在购买之前判断余额。如果购买一个商品之前，卡上的剩余金额大于或等于5元，就一定可以购买成功（即使购买后卡上余额为负），否则无法购买（即使金额足够）。所以大家都希望尽量使卡上的余额最少。<br>某天，食堂中有n种菜出售，每种菜可购买一次。已知每种菜的价格以及卡上的余额，问最少可使卡上的余额为多少。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>多组数据。对于每组数据：<br>第一行为正整数n，表示菜的数量。n&lt;=1000。<br>第二行包括n个正整数，表示每种菜的价格。价格不超过50。<br>第三行包括一个正整数m，表示卡上的余额。m&lt;=1000。</p>
 <p>n=0表示数据结束。</p>
@@ -188,7 +190,6 @@
 <h3 id="dp"><a href="#dp" class="headerlink" title="dp"></a>dp</h3><p>对数据从小到大排序，在不考虑最大元素的情况下求出m-5的余额能购买的最大值。 结果为 m - max(f[j]) - a[n] </p>
 <p>特判m&lt;5的情况</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1010</span>];</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">1010</span>];</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n, n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="keyword">sizeof</span>(f));</span><br><span class="line">		<span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; m;</span><br><span class="line">		<span class="keyword">if</span> (m &lt; <span class="number">5</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; m &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		sort(a + <span class="number">1</span>, a + <span class="number">1</span> + n);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = m - <span class="number">5</span>; j &gt;= a[i]; j--)</span><br><span class="line">				f[j] = max(f[j], f[j - a[i]] + a[i]);</span><br><span class="line">		<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m - <span class="number">5</span>; j++)</span><br><span class="line">			res = max(res, f[j]);</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; m-res-a[n] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2546" target="_blank" rel="noopener">原题链接</a></p>
 ]]></content>
       <categories>
         <category>算法竞赛</category>
@@ -200,7 +201,8 @@
   <entry>
     <title>滑雪 P1434</title>
     <url>/2020/03/21/P1434/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.luogu.com.cn/problem/P1434" target="_blank" rel="noopener">P1434</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>Michael 喜欢滑雪。这并不奇怪，因为滑雪的确很刺激。可是为了获得速度，滑的区域必须向下倾斜，而且当你滑到坡底，你不得不再次走上坡或者等待升降机来载你。Michael 想知道在一个区域中最长的滑坡。区域由一个二维数组给出。数组的每个数字代表点的高度。下面是一个例子：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1   2   3   4   5</span><br><span class="line">16  17  18  19  6</span><br><span class="line">15  24  25  20  7</span><br><span class="line">14  23  22  21  8</span><br><span class="line">13  12  11  10  9</span><br></pre></td></tr></table></figure>
@@ -224,7 +226,6 @@
 
 <p>记忆化dfs：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">110</span>][<span class="number">110</span>];</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">110</span>][<span class="number">110</span>];</span><br><span class="line"><span class="keyword">int</span> moves[<span class="number">4</span>][<span class="number">2</span>] = &#123; &#123;<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">1</span>&#125;,&#123;<span class="number">0</span>,<span class="number">-1</span>&#125; &#125;;</span><br><span class="line"><span class="keyword">int</span> r, c;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (dp[x][y]) <span class="keyword">return</span> dp[x][y];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> nx = x + moves[i][<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">int</span> ny = y + moves[i][<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span> (nx &gt;= <span class="number">1</span> &amp;&amp; nx &lt;= r &amp;&amp; ny &gt;= <span class="number">1</span> &amp;&amp; ny &lt;= c &amp;&amp; a[nx][ny] &gt; a[x][y])</span><br><span class="line">		&#123;</span><br><span class="line">			dp[x][y] = max(dp[x][y], dfs(nx, ny));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	dp[x][y]++;</span><br><span class="line">	<span class="keyword">return</span> dp[x][y];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; r &gt;&gt; c;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= r; i++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= c; j++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; a[i][j];</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= r; i++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= c; j++)</span><br><span class="line">			res=max(dfs(i, j),res);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> <a href="https://www.luogu.com.cn/problem/P1434" target="_blank" rel="noopener">原题链接</a></p>
 ]]></content>
       <categories>
         <category>算法竞赛</category>
@@ -236,7 +237,8 @@
   <entry>
     <title>VS2017使用scanf()读取字符串</title>
     <url>/2020/03/21/scanf-s/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>scanf_s()函数的第三个参数</p>
+<a id="more"></a>
 
 
 <p>vs2017上无法使用scanf()函数，但是提供了scanf_s()函数，在使用scanf_s()读取二维数组时遇到了以下问题</p>
@@ -253,7 +255,8 @@
   <entry>
     <title>最大的和 acwing 126</title>
     <url>/2020/03/20/ac126/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/126/" target="_blank" rel="noopener">Acwing126</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定一个包含整数的二维矩阵，子矩形是位于整个阵列内的任何大小为1 * 1或更大的连续子阵列。</p>
 <p>矩形的总和是该矩形中所有元素的总和。</p>
@@ -295,7 +298,8 @@
   <entry>
     <title>矩阵 acwing 156</title>
     <url>/2020/03/20/ac156/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/156/" target="_blank" rel="noopener">Acwing156</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定一个M行N列的01矩阵（只包含数字0或1的矩阵），再执行Q次询问，每次询问给出一个A行B列的01矩阵，求该矩阵是否在原矩阵中出现过。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行四个整数M,N,A,B。</p>
@@ -322,7 +326,8 @@
   <entry>
     <title>树形地铁系统 acwing 157</title>
     <url>/2020/03/20/ac157/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/157/" target="_blank" rel="noopener">Acwing157</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>一些主要城市拥有树形的地铁系统，即在任何一对车站之间，有且只有一种方式可以乘坐地铁。</p>
 <p>此外，这些城市大多数都有一个中央车站。</p>
@@ -357,7 +362,8 @@
   <entry>
     <title>滑动窗口 acwing 154</title>
     <url>/2020/03/19/ac154/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/154/" target="_blank" rel="noopener">Acwing154</a></p>
+<a id="more"></a>
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定一个大小为n≤10^6的数组。</p>
 <p>有一个大小为k的滑动窗口，它从数组的最左边移动到最右边。</p>
 <p>您只能在窗口中看到k个数字。</p>
@@ -429,7 +435,8 @@
   <entry>
     <title>Sunday算法</title>
     <url>/2020/03/19/sunday/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>sunday字符串匹配算法</p>
+<a id="more"></a>
 
 
 <p>代码</p>
@@ -441,20 +448,21 @@
       </categories>
   </entry>
   <entry>
-    <title>几个好网站</title>
+    <title>网站</title>
     <url>/2020/03/18/changyongwz/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>有用网站</p>
+<a id="more"></a>
 
-<p>1 视频片头动画模板 <code>https://panzoid.com/</code></p>
-<p>2 在线抠图 <code>https://www.remove.bg/</code></p>
-<p>3 字体下载 <code>https://www.zitijia.com/</code></p>
-<p>4 p站 （二次元插画网站）<code>https://www.pixiv.net/</code></p>
-<p>5 论文下载 <code>https://www.cn-ki.net/</code></p>
-<p>6 文档格式在线转换 <code>https://smallpdf.com/</code></p>
-<p>7 录屏投屏 <code>http://web.airdroid.com/</code></p>
-<p>8 各大网站热榜 <code>https://tophub.today/</code></p>
-<p>9 超清图片壁纸 <code>https://www.pexels.com/</code></p>
-<p>10 找网站的网站 <code>http://www.addog.vip/</code></p>
+<p>1 视频片头动画模板 <!--`https://panzoid.com/`--><a href="https://panzoid.com/" target="_blank" rel="noopener">https://panzoid.com/</a></p>
+<p>2 在线抠图 <!--`https://www.remove.bg/`--><a href="https://www.remove.bg/" target="_blank" rel="noopener">https://www.remove.bg/</a></p>
+<p>3 字体下载 <!--`https://www.zitijia.com/`--><a href="https://www.zitijia.com/" target="_blank" rel="noopener">https://www.zitijia.com/</a></p>
+<p>4 p站 （二次元插画网站）<!--` https://www.pixiv.net/`--><a href="https://www.pixiv.net/" target="_blank" rel="noopener">https://www.pixiv.net/</a></p>
+<p>5 论文下载 <!--`https://www.cn-ki.net/`--><a href="https://www.cn-ki.net/" target="_blank" rel="noopener">https://www.cn-ki.net/</a></p>
+<p>6 文档格式在线转换 <!--`https://smallpdf.com/`--><a href="https://smallpdf.com/" target="_blank" rel="noopener">https://smallpdf.com/</a></p>
+<p>7 录屏投屏 <!--`http://web.airdroid.com/`--><a href="http://web.airdroid.com/" target="_blank" rel="noopener">http://web.airdroid.com/</a></p>
+<p>8 各大网站热榜 <!--`https://tophub.today/`--><a href="https://tophub.today/" target="_blank" rel="noopener">https://tophub.today/</a></p>
+<p>9 超清图片壁纸 <!--`https://www.pexels.com/`--><a href="https://www.pexels.com/" target="_blank" rel="noopener">https://www.pexels.com/</a></p>
+<p>10 找网站的网站 <!--`http://www.addog.vip/`--><a href="http://www.addog.vip/" target="_blank" rel="noopener">http://www.addog.vip/</a></p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
@@ -463,7 +471,8 @@
   <entry>
     <title>最长异或值路径 acwing 144</title>
     <url>/2020/03/17/ac144/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/144/" target="_blank" rel="noopener">Acwing144</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定一个树，树上的边都具有权值。</p>
 <p>树中一条路径的异或长度被定义为路径上所有边的权值的异或和</p>
@@ -492,7 +501,8 @@
   <entry>
     <title>最大异或对 acwing 143</title>
     <url>/2020/03/17/ac143/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/143/" target="_blank" rel="noopener">Acwing143</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>在给定的N个整数A1，A2……AN中选出两个进行xor（异或）运算，得到的结果最大是多少？</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行输入一个整数N。</p>
@@ -519,7 +529,8 @@
   <entry>
     <title>前缀统计 acwing 142</title>
     <url>/2020/03/17/ac142/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/142/" target="_blank" rel="noopener">Acwing142</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定N个字符串S1,S2…SN，接下来进行M次询问，每次询问给定一个字符串T，求S1～SN中有多少个字符串是T的前缀。</p>
 <p>输入字符串的总长度不超过106，仅包含小写字母。</p>
@@ -553,7 +564,9 @@
   <entry>
     <title>mysql</title>
     <url>/2020/03/11/mysql/</url>
-    <content><![CDATA[<h1 id="MySQL-学习笔记"><a href="#MySQL-学习笔记" class="headerlink" title="MySQL 学习笔记"></a>MySQL 学习笔记</h1><h3 id="登录和退出MySQL服务器"><a href="#登录和退出MySQL服务器" class="headerlink" title="登录和退出MySQL服务器"></a>登录和退出MySQL服务器</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 登录MySQL</span></span><br><span class="line">$ mysql -u root -p12345612</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出MySQL数据库服务器</span></span><br><span class="line">exit;</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<p>MySQL基础内容</p>
+<a id="more"></a>
+<h1 id="MySQL-学习笔记"><a href="#MySQL-学习笔记" class="headerlink" title="MySQL 学习笔记"></a>MySQL 学习笔记</h1><h3 id="登录和退出MySQL服务器"><a href="#登录和退出MySQL服务器" class="headerlink" title="登录和退出MySQL服务器"></a>登录和退出MySQL服务器</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 登录MySQL</span></span><br><span class="line">$ mysql -u root -p12345612</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出MySQL数据库服务器</span></span><br><span class="line">exit;</span><br></pre></td></tr></table></figure>
 
 <h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 显示所有数据库</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建数据库</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">test</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 切换数据库</span></span><br><span class="line"><span class="keyword">use</span> <span class="keyword">test</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 显示数据表</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> pet (</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    owner <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    species <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    sex <span class="built_in">CHAR</span>(<span class="number">1</span>),</span><br><span class="line">    birth <span class="built_in">DATE</span>,</span><br><span class="line">    death <span class="built_in">DATE</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看数据表结构</span></span><br><span class="line"><span class="comment">-- describe pet;</span></span><br><span class="line">desc pet;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询表</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">from</span> pet;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 插入数据</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> pet <span class="keyword">VALUES</span> (<span class="string">'puffball'</span>, <span class="string">'Diane'</span>, <span class="string">'hamster'</span>, <span class="string">'f'</span>, <span class="string">'1990-03-30'</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改数据</span></span><br><span class="line"><span class="keyword">UPDATE</span> pet <span class="keyword">SET</span> <span class="keyword">name</span> = <span class="string">'squirrel'</span> <span class="keyword">where</span> owner = <span class="string">'Diane'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除数据</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> pet <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'squirrel'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> myorder;</span><br></pre></td></tr></table></figure>
 
@@ -565,7 +578,8 @@
   <entry>
     <title>html1</title>
     <url>/2020/02/19/html1/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>HTML基础内容</p>
+<a id="more"></a>
 <h1 id="HTML笔记"><a href="#HTML笔记" class="headerlink" title="HTML笔记"></a>HTML笔记</h1><h3 id="HTML基础部分"><a href="#HTML基础部分" class="headerlink" title="HTML基础部分"></a>HTML基础部分</h3><h6 id="HTML-Hypertext-Markup-Language-超文本标记语言"><a href="#HTML-Hypertext-Markup-Language-超文本标记语言" class="headerlink" title="HTML(Hypertext Markup Language 超文本标记语言)"></a>HTML(Hypertext Markup Language 超文本标记语言)</h6><p> 网页大致可以分为结构（HTML）表现（CSS）行为 (JS)<br> 元素和标签是一样的，元素就是标签，标签就是元素。</p>
 <p><strong>1.基础元素</strong></p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -813,7 +827,8 @@
   <entry>
     <title>2n皇后</title>
     <url>/2020/02/17/8queen/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="http://lx.lanqiao.cn/problem.page?gpid=T68" target="_blank" rel="noopener">蓝桥杯T86</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定一个n*n的棋盘，棋盘中有一些位置不能放皇后。现在要向棋盘中放入n个黑皇后和 n个白皇后，使任意的两个黑皇后都不在同一行、同一列或同一条对角线上，任意的两个白皇后都不在同一行、同一列或同一条对角线上。问总共有多少种放法？n小于等于8</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入的第一行为一个整数n，表示棋盘的大小。<br>接下来n行，每行n个0或1的整数，如果一个整数为1，表示对应的位置可以放皇后，如果一个整数为0，表示对应的位置不可以放皇后。</p>
@@ -835,7 +850,8 @@
   <entry>
     <title>防晒 acwing 110</title>
     <url>/2020/02/17/ac110/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/110/" target="_blank" rel="noopener">Acwing110</a></p>
+<a id="more"></a>
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>有C头奶牛进行日光浴，第i头奶牛需要minSPF[i]到maxSPF[i]单位强度之间的阳光。<br>每头奶牛在日光浴前必须涂防晒霜，防晒霜有L种，涂上第i种之后，身体接收到的阳光强度就会稳定为SPF[i]，第i种防晒霜有cover[i]瓶。<br>求最多可以满足多少头奶牛进行日光浴。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行输入整数C和L。</p>
 <p>接下来的C行，按次序每行输入一头牛的minSPF和maxSPF值,即第i行输入minSPF[i]和maxSPF[i]。</p>
@@ -866,7 +882,8 @@
   <entry>
     <title>小猫爬山 acwing 165</title>
     <url>/2020/02/17/ac165/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/165/" target="_blank" rel="noopener">Acwing165</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>翰翰和达达饲养了N只小猫，这天，小猫们要去爬山。</p>
 <p>经历了千辛万苦，小猫们终于爬上了山顶，但是疲倦的它们再也不想徒步走下山了（呜咕&gt;_&lt;）。</p>
@@ -896,7 +913,8 @@
   <entry>
     <title>可达性统计 acwing 164</title>
     <url>/2020/02/17/ac164/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/164/" target="_blank" rel="noopener">Acwing164</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行两个整数N,M，接下来M行每行两个整数x,y，表示从x到y的一条有向边。</p>
@@ -921,7 +939,8 @@
   <entry>
     <title>数独 acwing 166</title>
     <url>/2020/02/17/ac166/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/166/" target="_blank" rel="noopener">Acwing166</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>数独是一种传统益智游戏，你需要把一个9 × 9的数独补充完整，使得图中每行、每列、每个3 × 3的九宫格内数字1~9均恰好出现一次。</p>
 <p>请编写一个程序填写数独。</p>
@@ -954,7 +973,8 @@
   <entry>
     <title>加成序列 acwing 170</title>
     <url>/2020/02/17/ac170/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/170/" target="_blank" rel="noopener">Acwing170</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>满足如下条件的序列X（序列中元素被标号为1、2、3…m）被称为“加成序列”：</p>
 <p>1、X[1]=1</p>
@@ -994,7 +1014,8 @@
   <entry>
     <title>递归实现指数型枚举 acwing 92</title>
     <url>/2020/02/17/digui1/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/92/" target="_blank" rel="noopener">Acwing92</a></p>
+<a id="more"></a>
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>从 1~n 这 n 个整数中随机选取任意多个，输出所有可能的选择方案。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一个整数n。</p>
 <h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>每行输出一种方案。<br>同一行内的数必须升序排列，相邻两个数用恰好1个空格隔开。<br>对于没有选任何数的方案，输出空行。<br>本题有自定义校验器（SPJ），各行（不同方案）之间的顺序任意。</p>
@@ -1013,7 +1034,8 @@
   <entry>
     <title>生日蛋糕 acwing 168</title>
     <url>/2020/02/17/ac168/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/168/" target="_blank" rel="noopener">Acwing168</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>7月17日是Mr.W的生日，ACM-THU为此要制作一个体积为Nπ的M层生日蛋糕，每层都是一个圆柱体。</p>
 <p>设从下往上数第i层蛋糕是半径为Ri, 高度为Hi的圆柱。</p>
@@ -1047,7 +1069,8 @@
   <entry>
     <title>递归实现组合型枚举 acwing 93</title>
     <url>/2020/02/17/digui2/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/93/" target="_blank" rel="noopener">Acwing93</a></p>
+<a id="more"></a>
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>从 1~n 这 n 个整数中随机选出 m 个，输出所有可能的选择方案。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>两个整数 n,m ,在同一行用空格隔开。</p>
 <h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>按照从小到大的顺序输出所有方案，每行1个。<br>首先，同一行内的数升序排列，相邻两个数用一个空格隔开。<br>其次，对于两个不同的行，对应下标的数一一比较，字典序较小的排在前面（例如1 3 5 7排在1 3 6 8前面）。<br>思路：用二进制数表示每个数的选择情况<br>通过移位运算来枚举所有情况</p>
@@ -1064,7 +1087,8 @@
   <entry>
     <title>递归实现排列型枚举 acwing 94</title>
     <url>/2020/02/17/digui3/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/94/" target="_blank" rel="noopener">Acwing94</a></p>
+<a id="more"></a>
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>把 1~n 这 n 个整数排成一行后随机打乱顺序，输出所有可能的次序。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一个整数n。</p>
 <h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>按照从小到大的顺序输出所有方案，每行1个。<br>首先，同一行相邻两个数用一个空格隔开。<br>其次，对于两个不同的行，对应下标的数一一比较，字典序较小的排在前面<br>思路：dfs</p>
@@ -1081,7 +1105,8 @@
   <entry>
     <title>最短Hamilton路径 acwing 91</title>
     <url>/2020/02/17/hamilton/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/91/" target="_blank" rel="noopener">Acwing91</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定一张n个点的带权无向图，点从 0~n-1 标号，求起点0 到终点n-1的最短Hamilton路径。 Hamilton路径的定义是从0到 n-1不重不漏地经过每个点恰好一次。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入的第一行为一个整数n，表示棋盘的大小。<br>接下来n行，每行n个0或1的整数，如果一个整数为1，表示对应的位置可以放皇后，如果一个整数为0，表示对应的位置不可以放皇后。</p>
@@ -1105,7 +1130,8 @@
   <entry>
     <title>飞行员兄弟 acwing 116</title>
     <url>/2020/02/17/html-day01/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/116/" target="_blank" rel="noopener">Acwing116</a></p>
+<a id="more"></a>
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>飞行员兄弟”这个游戏，需要玩家顺利的打开一个拥有16个把手的冰箱。</p>
 <p>已知每个把手可以处于以下两种状态之一：打开或关闭。</p>
 <p>只有当所有把手都打开时，冰箱才会打开。</p>
@@ -1132,7 +1158,8 @@
   <entry>
     <title>火车进栈 acwing 129</title>
     <url>/2020/02/17/huochejinzhan/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/129/" target="_blank" rel="noopener">Acwing129</a></p>
+<a id="more"></a>
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>题目描述<br>这里有nn列火车将要进站再出站，但是，每列火车只有1节，那就是车头。</p>
 <p>这nn列火车按11到nn的顺序从东方左转进站，这个车站是南北方向的，它虽然无限长，只可惜是一个死胡同，而且站台只有一条股道，火车只能倒着从西方出去，而且每列火车必须进站，先进后出。</p>
 <p>也就是说这个火车站其实就相当于一个栈，每次可以让右侧头火车进栈，或者让栈顶火车出站。</p>
@@ -1159,7 +1186,8 @@
   <entry>
     <title>木棒 acwing 167</title>
     <url>/2020/02/17/mubang/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/167/" target="_blank" rel="noopener">Acwing167</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>乔治拿来一组等长的木棒，将它们随机地砍断，使得每一节木棍的长度都不超过50个长度单位。然后他又想把这些木棍恢复到为裁截前的状态，但忘记了初始时有多少木棒以及木棒的初始长度。请你设计一个程序，帮助乔治计算木棒的可能最小长度。每一节木棍的长度都用大于零的整数表示</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入包含多组数据，每组数据包括两行。</p>
@@ -1188,7 +1216,8 @@
   <entry>
     <title>a^b acwing 89</title>
     <url>/2020/02/17/quickcloth/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/89/" target="_blank" rel="noopener">Acwing89</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>求a的b次方对p取模的值。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>三个整数 a,b,p ,在同一行用空格隔开。</p>
@@ -1212,7 +1241,8 @@
   <entry>
     <title>直方图中最大的矩形 acwing 131</title>
     <url>/2020/02/17/ac131/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/131/" target="_blank" rel="noopener">Acwing131</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>直方图是由在公共基线处对齐的一系列矩形组成的多边形。</p>
 <p>矩形具有相等的宽度，但可以具有不同的高度。</p>
@@ -1253,7 +1283,8 @@
   <entry>
     <title>城市游戏 acwing 152</title>
     <url>/2020/02/17/ac152/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/152/" target="_blank" rel="noopener">Acwing152</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>有一天，小猫rainbow和freda来到了湘西张家界的天门山玉蟾宫，玉蟾宫宫主蓝兔盛情地款待了它们，并赐予它们一片土地。</p>
 <p>这片土地被分成N*M个格子，每个格子里写着’R’或者’F’，R代表这块土地被赐予了rainbow，F代表这块土地被赐予了freda。</p>
@@ -1284,7 +1315,8 @@
   <entry>
     <title>兔子与兔子 acwing 138</title>
     <url>/2020/02/17/ac138/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/138/" target="_blank" rel="noopener">Acwing138</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>很久很久以前，森林里住着一群兔子。</p>
 <p>有一天，兔子们想要研究自己的 DNA 序列。</p>
@@ -1317,7 +1349,8 @@
   <entry>
     <title>回文子串的最大长度 acwing 139</title>
     <url>/2020/02/17/ac139/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/139/" target="_blank" rel="noopener">Acwing139</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>如果一个字符串正着读和倒着读是一样的，则称它是回文的。</p>
 <p>给定一个长度为N的字符串S，求他的最长回文子串的长度是多少。</p>
@@ -1345,7 +1378,8 @@
   <entry>
     <title>编辑器 acwing 128</title>
     <url>/2020/02/17/ac128/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/128/" target="_blank" rel="noopener">Acwing128</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>你将要实现一个功能强大的整数序列编辑器。</p>
 <p>在开始时，序列是空的。</p>
@@ -1375,7 +1409,8 @@
   <entry>
     <title>数组模拟邻接表</title>
     <url>/2020/02/17/shuzuljb/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>数组模拟邻接表模板</p>
+<a id="more"></a>
 
 <p>这两天做到了很多这样的问题，所以我就想写一下关于这个问题的一些总结</p>
 <p>首先我们先看一下常见的代码模板</p>
@@ -1413,7 +1448,8 @@
   <entry>
     <title>杨老师的照相排列 acwing 271</title>
     <url>/2020/02/17/ac271/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/271/" target="_blank" rel="noopener">Acwing271</a></p>
+<a id="more"></a>
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>有 N 个学生合影，站成左端对齐的 k 排，每排分别有 N1,N2,…,Nk 个人。 (N1≥N2≥…≥Nk)</p>
 <p>第1排站在最后边，第 k 排站在最前边。</p>
@@ -1447,34 +1483,5 @@
       <tags>
         <tag>线性DP</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>my first blog article</title>
-    <url>/2020/02/16/my-first-blog-article/</url>
-    <content><![CDATA[<a id="more"></a>
-<h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p>内容</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">110</span>;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">2</span>*N][<span class="number">2</span>*N];</span><br><span class="line"><span class="keyword">int</span> n,w[<span class="number">2</span>*N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span>&gt;&gt;w[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n+<span class="number">1</span>;i&lt;=<span class="number">2</span>*n;i++) w[i]=w[i-n];</span><br><span class="line">    <span class="comment">//for(int i=1;i&lt;2*n;i++) f[i][i+1]=w[i]*w[i+1];</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">2</span>;len&lt;=n+<span class="number">1</span>;len++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i+len<span class="number">-1</span>&lt;=<span class="number">2</span>*n;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> l=i,r=i+len<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=l+<span class="number">1</span>;k&lt;r;k++)&#123;</span><br><span class="line">                <span class="comment">//cout&lt;&lt;l&lt;&lt;" "&lt;&lt;k&lt;&lt;" "&lt;&lt;r&lt;&lt;" "&lt;&lt;f[l][k]&lt;&lt;" "&lt;&lt;f[k][r]&lt;&lt;" "&lt;&lt;w[l]*w[k]*w[r];</span></span><br><span class="line">                f[l][r]=max(f[l][r],f[l][k]+f[k][r]+w[l]*w[k]*w[r]);</span><br><span class="line">                <span class="comment">//cout&lt;&lt;" "&lt;&lt;f[l][r]&lt;&lt;endl;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n+<span class="number">1</span>;i++) ans=max(ans,f[i][n+i]);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1>]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/02/16/hello-world/</url>
-    <content><![CDATA[<a id="more"></a>
-<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
   </entry>
 </search>
