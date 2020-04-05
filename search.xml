@@ -882,71 +882,6 @@
       </tags>
   </entry>
   <entry>
-    <title>编辑器 acwing 128</title>
-    <url>/2020/02/17/ac128/</url>
-    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/130/" target="_blank" rel="noopener">Acwing128</a></p>
-<a id="more"></a>
-
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>你将要实现一个功能强大的整数序列编辑器。</p>
-<p>在开始时，序列是空的。</p>
-<p>编辑器共有五种指令，如下：</p>
-<p>1、“I x”，在光标处插入数值x。<br>2、“D”，将光标前面的第一个元素删除，如果前面没有元素，则忽略此操作。<br>3、“L”，将光标向左移动，跳过一个元素，如果左边没有元素，则忽略此操作。<br>4、“R”，将光标向右移动，跳过一个元素，如果右边没有元素，则忽略次操作。<br>5、“Q k”，假设此刻光标之前的序列为a1,a2,…,an,输出max1≤i≤kSi，其中Si=a1+a2+…+ai。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行包含一个整数Q，表示指令的总数。</p>
-<p>接下来Q行，每行一个指令，具体指令格式如题目描述。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>每一个“Q k”指令，输出一个整数作为结果，每个结果占一行</p>
-<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤Q≤106,<br>|x|≤103,<br>1≤k≤n</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">8</span><br><span class="line">I 2</span><br><span class="line">I -1</span><br><span class="line">I 1</span><br><span class="line">Q 3</span><br><span class="line">L</span><br><span class="line">D</span><br><span class="line">R</span><br><span class="line">Q 2</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
-<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在光标左侧和右侧分别建立一个栈，L操作对应于将左侧栈顶元素弹出并加入</span><br><span class="line">到右侧栈，R操作反之，每次在左侧栈中加入元素(L 或 l x 操作)都要计算</span><br><span class="line">一下当前的和</span><br></pre></td></tr></table></figure>
-
-
-<p>代码</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1E6</span> + <span class="number">10</span>;</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; p, q;</span><br><span class="line"><span class="keyword">int</span> sum[N], f[N], n, v;</span><br><span class="line"><span class="keyword">char</span> a;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	f[<span class="number">0</span>] = <span class="number">-1e7</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a;</span><br><span class="line">		<span class="keyword">if</span> (a == <span class="string">'L'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (!p.empty())</span><br><span class="line">			&#123;</span><br><span class="line">				q.push(p.top());</span><br><span class="line">				p.pop();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'R'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (!q.empty())</span><br><span class="line">			&#123;</span><br><span class="line">				p.push(q.top());</span><br><span class="line">				q.pop();</span><br><span class="line">				sum[p.size()] = sum[p.size() - <span class="number">1</span>] + p.top();</span><br><span class="line">				f[p.size()] = max(f[p.size() - <span class="number">1</span>], sum[p.size()]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'D'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (!p.empty())</span><br><span class="line">				p.pop();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'I'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; v;</span><br><span class="line">			p.push(v);</span><br><span class="line">			sum[p.size()] = sum[p.size() - <span class="number">1</span>] + p.top();</span><br><span class="line">			f[p.size()] = max(f[p.size() - <span class="number">1</span>], sum[p.size()]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'Q'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; v;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; f[v] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法竞赛</category>
-      </categories>
-      <tags>
-        <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>兔子与兔子 acwing 138</title>
-    <url>/2020/02/17/ac138/</url>
-    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/140/" target="_blank" rel="noopener">Acwing138</a></p>
-<a id="more"></a>
-
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>很久很久以前，森林里住着一群兔子。</p>
-<p>有一天，兔子们想要研究自己的 DNA 序列。</p>
-<p>我们首先选取一个好长好长的 DNA 序列（小兔子是外星生物，DNA 序列可能包含 26 个小写英文字母）。</p>
-<p>然后我们每次选择两个区间，询问如果用两个区间里的 DNA 序列分别生产出来两只兔子，这两个兔子是否一模一样。</p>
-<p>注意两个兔子一模一样只可能是他们的 DNA 序列一模一样。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行输入一个 DNA 字符串 S。</p>
-<p>第二行一个数字 m，表示 m 次询问。</p>
-<p>接下来 m 行，每行四个数字 l1,r1,l2,r2，分别表示此次询问的两个区间，注意字符串的位置从1开始编号。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每次询问，输出一行表示结果。</p>
-<p>如果两只兔子完全相同输出 Yes，否则输出 No（注意大小写）。</p>
-<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤length(S),m≤1000000</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">aabbaabb</span><br><span class="line">3</span><br><span class="line">1 3 5 7</span><br><span class="line">1 3 6 8</span><br><span class="line">1 2 1 2</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Yes</span><br><span class="line">No</span><br><span class="line">Yes</span><br></pre></td></tr></table></figure>
-
-<h3 id="字符串hash"><a href="#字符串hash" class="headerlink" title="字符串hash"></a>字符串hash</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">字符串哈希，就是将字符串变成数值，最终得到的数值是一个p进制数，并且</span><br><span class="line">p最好是素数，这里p一般取131和13331</span><br><span class="line">由于这种方式得到的数很大，我们一般要模上一个数字，这里的取模数字一般</span><br><span class="line">取2^64,即unsigned ll 的默认取模即可</span><br></pre></td></tr></table></figure>
-
-
-<p>代码</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ULL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000100</span>;</span><br><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line">ULL hashh[N], p[N], n, len, b1, e1, b2, e2;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>, str + <span class="number">1</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	len = <span class="built_in">strlen</span>(str + <span class="number">1</span>);</span><br><span class="line">	p[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">	    hashh[i] = hashh[i - <span class="number">1</span>] * <span class="number">131</span> + str[i] - <span class="string">'a'</span> + <span class="number">1</span>;<span class="comment">//前缀和递推求出每一个哈希值</span></span><br><span class="line">	    p[i] = p[i<span class="number">-1</span>] * <span class="number">131</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; b1 &gt;&gt; e1 &gt;&gt; b2 &gt;&gt; e2;</span><br><span class="line">		ULL fir = hashh[e1] - hashh[b1] * p[e1-b1];</span><br><span class="line">		ULL sec=  hashh[e2] - hashh[b2] * p[e1-b1];</span><br><span class="line">		<span class="keyword">if</span> (fir == sec) <span class="built_in">cout</span> &lt;&lt; <span class="string">"Yes"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"No"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法竞赛</category>
-      </categories>
-      <tags>
-        <tag>hash</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>直方图中最大的矩形 acwing 131</title>
     <url>/2020/02/17/ac131/</url>
     <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/133/" target="_blank" rel="noopener">Acwing131</a></p>
@@ -989,6 +924,37 @@
       </tags>
   </entry>
   <entry>
+    <title>编辑器 acwing 128</title>
+    <url>/2020/02/17/ac128/</url>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/130/" target="_blank" rel="noopener">Acwing128</a></p>
+<a id="more"></a>
+
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>你将要实现一个功能强大的整数序列编辑器。</p>
+<p>在开始时，序列是空的。</p>
+<p>编辑器共有五种指令，如下：</p>
+<p>1、“I x”，在光标处插入数值x。<br>2、“D”，将光标前面的第一个元素删除，如果前面没有元素，则忽略此操作。<br>3、“L”，将光标向左移动，跳过一个元素，如果左边没有元素，则忽略此操作。<br>4、“R”，将光标向右移动，跳过一个元素，如果右边没有元素，则忽略次操作。<br>5、“Q k”，假设此刻光标之前的序列为a1,a2,…,an,输出max1≤i≤kSi，其中Si=a1+a2+…+ai。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行包含一个整数Q，表示指令的总数。</p>
+<p>接下来Q行，每行一个指令，具体指令格式如题目描述。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>每一个“Q k”指令，输出一个整数作为结果，每个结果占一行</p>
+<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤Q≤106,<br>|x|≤103,<br>1≤k≤n</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">8</span><br><span class="line">I 2</span><br><span class="line">I -1</span><br><span class="line">I 1</span><br><span class="line">Q 3</span><br><span class="line">L</span><br><span class="line">D</span><br><span class="line">R</span><br><span class="line">Q 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在光标左侧和右侧分别建立一个栈，L操作对应于将左侧栈顶元素弹出并加入</span><br><span class="line">到右侧栈，R操作反之，每次在左侧栈中加入元素(L 或 l x 操作)都要计算</span><br><span class="line">一下当前的和</span><br></pre></td></tr></table></figure>
+
+
+<p>代码</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1E6</span> + <span class="number">10</span>;</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; p, q;</span><br><span class="line"><span class="keyword">int</span> sum[N], f[N], n, v;</span><br><span class="line"><span class="keyword">char</span> a;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	f[<span class="number">0</span>] = <span class="number">-1e7</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a;</span><br><span class="line">		<span class="keyword">if</span> (a == <span class="string">'L'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (!p.empty())</span><br><span class="line">			&#123;</span><br><span class="line">				q.push(p.top());</span><br><span class="line">				p.pop();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'R'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (!q.empty())</span><br><span class="line">			&#123;</span><br><span class="line">				p.push(q.top());</span><br><span class="line">				q.pop();</span><br><span class="line">				sum[p.size()] = sum[p.size() - <span class="number">1</span>] + p.top();</span><br><span class="line">				f[p.size()] = max(f[p.size() - <span class="number">1</span>], sum[p.size()]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'D'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (!p.empty())</span><br><span class="line">				p.pop();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'I'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; v;</span><br><span class="line">			p.push(v);</span><br><span class="line">			sum[p.size()] = sum[p.size() - <span class="number">1</span>] + p.top();</span><br><span class="line">			f[p.size()] = max(f[p.size() - <span class="number">1</span>], sum[p.size()]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'Q'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; v;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; f[v] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>回文子串的最大长度 acwing 139</title>
     <url>/2020/02/17/ac139/</url>
     <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/141/" target="_blank" rel="noopener">Acwing139</a></p>
@@ -1009,6 +975,40 @@
 
 <p>代码</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2000010</span>, base = <span class="number">131</span>;</span><br><span class="line">ull hl[N], hr[N], p[N];</span><br><span class="line"><span class="comment">//hl表示从左往右的字符串hash</span></span><br><span class="line"><span class="comment">//hr表示从右往左的字符串hash</span></span><br><span class="line">ull l, r, mid, res, t;</span><br><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line"><span class="function">ull <span class="title">gett</span><span class="params">(ull h[], ull l, ull r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> h[r] - h[l - <span class="number">1</span>] * p[r - l + <span class="number">1</span>];  <span class="comment">//计算出l~r的字符串的哈希值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%s"</span>, str + <span class="number">1</span>), <span class="built_in">strcmp</span>(str + <span class="number">1</span>, <span class="string">"END"</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> len = <span class="built_in">strlen</span>(str + <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = len * <span class="number">2</span>; i; i -= <span class="number">2</span>)<span class="comment">//扩充字符串以合并奇偶串两种情况</span></span><br><span class="line">		&#123;</span><br><span class="line">			str[i] = str[i / <span class="number">2</span>];</span><br><span class="line">			str[i - <span class="number">1</span>] = <span class="string">'z'</span> + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		p[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">		len *= <span class="number">2</span>;<span class="comment">//合并完长度要乘以2</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, j = len; i &lt;= len; i++, j--)<span class="comment">//初始化信息</span></span><br><span class="line">		&#123;</span><br><span class="line">			hl[i] = hl[i - <span class="number">1</span>] * base + str[i] - <span class="string">'a'</span> + <span class="number">1</span>;</span><br><span class="line">			hr[i] = hr[i - <span class="number">1</span>] * base + str[j] - <span class="string">'a'</span> + <span class="number">1</span>;</span><br><span class="line">			p[i] = p[i - <span class="number">1</span>] * base;</span><br><span class="line">		&#125;</span><br><span class="line">		res = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			l = <span class="number">0</span>;</span><br><span class="line">			r = min(i - <span class="number">1</span>, len - i);</span><br><span class="line">			<span class="keyword">while</span> (l &lt; r)<span class="comment">//二分法</span></span><br><span class="line">			&#123;</span><br><span class="line">				mid = (l + r + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">if</span> (gett(hl, i - mid, i - <span class="number">1</span>) != gett(hr, len - mid - i + <span class="number">1</span>, len - i))<span class="comment">//注意边界的取值</span></span><br><span class="line">					r = mid - <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					l = mid;</span><br><span class="line">			&#125; </span><br><span class="line">			<span class="comment">//mid可理解为回文串中心到两边的距离</span></span><br><span class="line">			mid = (l + r + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span> (str[i - mid] &gt; <span class="string">'z'</span>)<span class="comment">//如果边界是无用字符</span></span><br><span class="line">				res = max(res, mid);</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				res = max(res, mid + <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Case %d: %d\n"</span>, ++t, res);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>hash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>兔子与兔子 acwing 138</title>
+    <url>/2020/02/17/ac138/</url>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/140/" target="_blank" rel="noopener">Acwing138</a></p>
+<a id="more"></a>
+
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>很久很久以前，森林里住着一群兔子。</p>
+<p>有一天，兔子们想要研究自己的 DNA 序列。</p>
+<p>我们首先选取一个好长好长的 DNA 序列（小兔子是外星生物，DNA 序列可能包含 26 个小写英文字母）。</p>
+<p>然后我们每次选择两个区间，询问如果用两个区间里的 DNA 序列分别生产出来两只兔子，这两个兔子是否一模一样。</p>
+<p>注意两个兔子一模一样只可能是他们的 DNA 序列一模一样。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行输入一个 DNA 字符串 S。</p>
+<p>第二行一个数字 m，表示 m 次询问。</p>
+<p>接下来 m 行，每行四个数字 l1,r1,l2,r2，分别表示此次询问的两个区间，注意字符串的位置从1开始编号。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每次询问，输出一行表示结果。</p>
+<p>如果两只兔子完全相同输出 Yes，否则输出 No（注意大小写）。</p>
+<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤length(S),m≤1000000</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">aabbaabb</span><br><span class="line">3</span><br><span class="line">1 3 5 7</span><br><span class="line">1 3 6 8</span><br><span class="line">1 2 1 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Yes</span><br><span class="line">No</span><br><span class="line">Yes</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串hash"><a href="#字符串hash" class="headerlink" title="字符串hash"></a>字符串hash</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">字符串哈希，就是将字符串变成数值，最终得到的数值是一个p进制数，并且</span><br><span class="line">p最好是素数，这里p一般取131和13331</span><br><span class="line">由于这种方式得到的数很大，我们一般要模上一个数字，这里的取模数字一般</span><br><span class="line">取2^64,即unsigned ll 的默认取模即可</span><br></pre></td></tr></table></figure>
+
+
+<p>代码</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ULL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000100</span>;</span><br><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line">ULL hashh[N], p[N], n, len, b1, e1, b2, e2;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>, str + <span class="number">1</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	len = <span class="built_in">strlen</span>(str + <span class="number">1</span>);</span><br><span class="line">	p[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">	    hashh[i] = hashh[i - <span class="number">1</span>] * <span class="number">131</span> + str[i] - <span class="string">'a'</span> + <span class="number">1</span>;<span class="comment">//前缀和递推求出每一个哈希值</span></span><br><span class="line">	    p[i] = p[i<span class="number">-1</span>] * <span class="number">131</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; b1 &gt;&gt; e1 &gt;&gt; b2 &gt;&gt; e2;</span><br><span class="line">		ULL fir = hashh[e1] - hashh[b1] * p[e1-b1];</span><br><span class="line">		ULL sec=  hashh[e2] - hashh[b2] * p[e1-b1];</span><br><span class="line">		<span class="keyword">if</span> (fir == sec) <span class="built_in">cout</span> &lt;&lt; <span class="string">"Yes"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"No"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法竞赛</category>
@@ -1256,6 +1256,26 @@
       </tags>
   </entry>
   <entry>
+    <title>递归实现指数型枚举 acwing 92</title>
+    <url>/2020/02/17/digui1/</url>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/94/" target="_blank" rel="noopener">Acwing92</a></p>
+<a id="more"></a>
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>从 1~n 这 n 个整数中随机选取任意多个，输出所有可能的选择方案。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一个整数n。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>每行输出一种方案。<br>同一行内的数必须升序排列，相邻两个数用恰好1个空格隔开。<br>对于没有选任何数的方案，输出空行。<br>本题有自定义校验器（SPJ），各行（不同方案）之间的顺序任意。</p>
+<!--more-->
+<p>思路：用二进制数表示每个数的选择情况<br>通过移位运算来枚举所有情况</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> state)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (now &gt; n) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (now == n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (state &gt;&gt; i &amp; <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(now + <span class="number">1</span>, (state &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>); <span class="comment">//选择第now个数</span></span><br><span class="line">	dfs(now + <span class="number">1</span>, state &lt;&lt; <span class="number">1</span>);       <span class="comment">//不选第now个数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	dfs(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+        <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>递归实现组合型枚举 acwing 93</title>
     <url>/2020/02/17/digui2/</url>
     <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/95/" target="_blank" rel="noopener">Acwing93</a></p>
@@ -1289,26 +1309,6 @@
       <tags>
         <tag>递归</tag>
         <tag>枚举</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>递归实现指数型枚举 acwing 92</title>
-    <url>/2020/02/17/digui1/</url>
-    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/94/" target="_blank" rel="noopener">Acwing92</a></p>
-<a id="more"></a>
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>从 1~n 这 n 个整数中随机选取任意多个，输出所有可能的选择方案。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一个整数n。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>每行输出一种方案。<br>同一行内的数必须升序排列，相邻两个数用恰好1个空格隔开。<br>对于没有选任何数的方案，输出空行。<br>本题有自定义校验器（SPJ），各行（不同方案）之间的顺序任意。</p>
-<!--more-->
-<p>思路：用二进制数表示每个数的选择情况<br>通过移位运算来枚举所有情况</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> state)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (now &gt; n) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (now == n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (state &gt;&gt; i &amp; <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(now + <span class="number">1</span>, (state &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>); <span class="comment">//选择第now个数</span></span><br><span class="line">	dfs(now + <span class="number">1</span>, state &lt;&lt; <span class="number">1</span>);       <span class="comment">//不选第now个数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	dfs(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法竞赛</category>
-      </categories>
-      <tags>
-        <tag>递归</tag>
-        <tag>位运算</tag>
       </tags>
   </entry>
   <entry>
