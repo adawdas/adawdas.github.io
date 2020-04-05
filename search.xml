@@ -882,48 +882,6 @@
       </tags>
   </entry>
   <entry>
-    <title>直方图中最大的矩形 acwing 131</title>
-    <url>/2020/02/17/ac131/</url>
-    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/133/" target="_blank" rel="noopener">Acwing131</a></p>
-<a id="more"></a>
-
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>直方图是由在公共基线处对齐的一系列矩形组成的多边形。</p>
-<p>矩形具有相等的宽度，但可以具有不同的高度。</p>
-<p>例如，图例左侧显示了由高度为2,1,4,5,1,3,3的矩形组成的直方图，矩形的宽度都为1：</p>
-<p><img src="/images/ac131.png" alt="alt"></p>
-<p>通常，直方图用于表示离散分布，例如，文本中字符的频率。</p>
-<p>现在，请你计算在公共基线处对齐的直方图中最大矩形的面积。</p>
-<p>图例右图显示了所描绘直方图的最大对齐矩形。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入包含几个测试用例。</p>
-<p>每个测试用例占据一行，用以描述一个直方图，并以整数n开始，表示组成直方图的矩形数目。</p>
-<p>然后跟随n个整数h1，…，hn。</p>
-<p>这些数字以从左到右的顺序表示直方图的各个矩形的高度。</p>
-<p>每个矩形的宽度为1。</p>
-<p>同行数字用空格隔开。</p>
-<p>当输入用例为n=0时，结束输入，且该用例不用考虑。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每一个测试用例，输出一个整数，代表指定直方图中最大矩形的区域面积。</p>
-<p>每个数据占一行。</p>
-<p>请注意，此矩形必须在公共基线处对齐。</p>
-<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤n≤100000,<br>0≤hi≤1000000000</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">7 2 1 4 5 1 3 3</span><br><span class="line">4 1000 1000 1000 1000</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">8</span><br><span class="line">4000</span><br></pre></td></tr></table></figure>
-
-<h3 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">此问题用到单调栈的思想，即栈内元素单调增或单调减，经过观察，我们发现</span><br><span class="line">当某一个矩形左侧的矩形比它自身要高时，它自身的高度对于左侧便失去了</span><br><span class="line">意义，所以我们可以保持栈内的元素是单调递增的，每次遇到比栈顶元素小的</span><br><span class="line">元素时，就不断弹出栈内元素，直到栈顶元素小于当前元素，同时计算出弹出</span><br><span class="line">元素所形成的最大面积</span><br></pre></td></tr></table></figure>
-
-
-
-<p>代码</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">101010</span>;</span><br><span class="line">ll n, p, len, res, a[N], s[N], w[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n, n)</span><br><span class="line">	&#123;</span><br><span class="line">		res = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">		a[n + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">		p = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (s[p] &lt; a[i])<span class="comment">//保证栈中是递增序列</span></span><br><span class="line">			&#123;</span><br><span class="line">				s[++p] = a[i];</span><br><span class="line">				w[p] = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				len = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">while</span> (s[p] &gt; a[i])</span><br><span class="line">				&#123;</span><br><span class="line">					len += w[p];</span><br><span class="line">					res = max(res, s[p] * len);</span><br><span class="line">					p--;</span><br><span class="line">				&#125;</span><br><span class="line">				s[++p] = a[i];</span><br><span class="line">				w[p] = len + <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法竞赛</category>
-      </categories>
-      <tags>
-        <tag>单调栈</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>编辑器 acwing 128</title>
     <url>/2020/02/17/ac128/</url>
     <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/130/" target="_blank" rel="noopener">Acwing128</a></p>
@@ -986,6 +944,48 @@
       </categories>
       <tags>
         <tag>hash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>直方图中最大的矩形 acwing 131</title>
+    <url>/2020/02/17/ac131/</url>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/133/" target="_blank" rel="noopener">Acwing131</a></p>
+<a id="more"></a>
+
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>直方图是由在公共基线处对齐的一系列矩形组成的多边形。</p>
+<p>矩形具有相等的宽度，但可以具有不同的高度。</p>
+<p>例如，图例左侧显示了由高度为2,1,4,5,1,3,3的矩形组成的直方图，矩形的宽度都为1：</p>
+<p><img src="/images/ac131.png" alt="alt"></p>
+<p>通常，直方图用于表示离散分布，例如，文本中字符的频率。</p>
+<p>现在，请你计算在公共基线处对齐的直方图中最大矩形的面积。</p>
+<p>图例右图显示了所描绘直方图的最大对齐矩形。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入包含几个测试用例。</p>
+<p>每个测试用例占据一行，用以描述一个直方图，并以整数n开始，表示组成直方图的矩形数目。</p>
+<p>然后跟随n个整数h1，…，hn。</p>
+<p>这些数字以从左到右的顺序表示直方图的各个矩形的高度。</p>
+<p>每个矩形的宽度为1。</p>
+<p>同行数字用空格隔开。</p>
+<p>当输入用例为n=0时，结束输入，且该用例不用考虑。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每一个测试用例，输出一个整数，代表指定直方图中最大矩形的区域面积。</p>
+<p>每个数据占一行。</p>
+<p>请注意，此矩形必须在公共基线处对齐。</p>
+<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤n≤100000,<br>0≤hi≤1000000000</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">7 2 1 4 5 1 3 3</span><br><span class="line">4 1000 1000 1000 1000</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">8</span><br><span class="line">4000</span><br></pre></td></tr></table></figure>
+
+<h3 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">此问题用到单调栈的思想，即栈内元素单调增或单调减，经过观察，我们发现</span><br><span class="line">当某一个矩形左侧的矩形比它自身要高时，它自身的高度对于左侧便失去了</span><br><span class="line">意义，所以我们可以保持栈内的元素是单调递增的，每次遇到比栈顶元素小的</span><br><span class="line">元素时，就不断弹出栈内元素，直到栈顶元素小于当前元素，同时计算出弹出</span><br><span class="line">元素所形成的最大面积</span><br></pre></td></tr></table></figure>
+
+
+
+<p>代码</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">101010</span>;</span><br><span class="line">ll n, p, len, res, a[N], s[N], w[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n, n)</span><br><span class="line">	&#123;</span><br><span class="line">		res = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">		a[n + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">		p = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (s[p] &lt; a[i])<span class="comment">//保证栈中是递增序列</span></span><br><span class="line">			&#123;</span><br><span class="line">				s[++p] = a[i];</span><br><span class="line">				w[p] = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				len = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">while</span> (s[p] &gt; a[i])</span><br><span class="line">				&#123;</span><br><span class="line">					len += w[p];</span><br><span class="line">					res = max(res, s[p] * len);</span><br><span class="line">					p--;</span><br><span class="line">				&#125;</span><br><span class="line">				s[++p] = a[i];</span><br><span class="line">				w[p] = len + <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>单调栈</tag>
       </tags>
   </entry>
   <entry>
@@ -1256,26 +1256,6 @@
       </tags>
   </entry>
   <entry>
-    <title>递归实现指数型枚举 acwing 92</title>
-    <url>/2020/02/17/digui1/</url>
-    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/94/" target="_blank" rel="noopener">Acwing92</a></p>
-<a id="more"></a>
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>从 1~n 这 n 个整数中随机选取任意多个，输出所有可能的选择方案。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一个整数n。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>每行输出一种方案。<br>同一行内的数必须升序排列，相邻两个数用恰好1个空格隔开。<br>对于没有选任何数的方案，输出空行。<br>本题有自定义校验器（SPJ），各行（不同方案）之间的顺序任意。</p>
-<!--more-->
-<p>思路：用二进制数表示每个数的选择情况<br>通过移位运算来枚举所有情况</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> state)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (now &gt; n) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (now == n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (state &gt;&gt; i &amp; <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(now + <span class="number">1</span>, (state &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>); <span class="comment">//选择第now个数</span></span><br><span class="line">	dfs(now + <span class="number">1</span>, state &lt;&lt; <span class="number">1</span>);       <span class="comment">//不选第now个数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	dfs(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法竞赛</category>
-      </categories>
-      <tags>
-        <tag>递归</tag>
-        <tag>位运算</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>递归实现组合型枚举 acwing 93</title>
     <url>/2020/02/17/digui2/</url>
     <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/95/" target="_blank" rel="noopener">Acwing93</a></p>
@@ -1309,6 +1289,26 @@
       <tags>
         <tag>递归</tag>
         <tag>枚举</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>递归实现指数型枚举 acwing 92</title>
+    <url>/2020/02/17/digui1/</url>
+    <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/94/" target="_blank" rel="noopener">Acwing92</a></p>
+<a id="more"></a>
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>从 1~n 这 n 个整数中随机选取任意多个，输出所有可能的选择方案。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一个整数n。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>每行输出一种方案。<br>同一行内的数必须升序排列，相邻两个数用恰好1个空格隔开。<br>对于没有选任何数的方案，输出空行。<br>本题有自定义校验器（SPJ），各行（不同方案）之间的顺序任意。</p>
+<!--more-->
+<p>思路：用二进制数表示每个数的选择情况<br>通过移位运算来枚举所有情况</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> state)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (now &gt; n) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (now == n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (state &gt;&gt; i &amp; <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(now + <span class="number">1</span>, (state &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>); <span class="comment">//选择第now个数</span></span><br><span class="line">	dfs(now + <span class="number">1</span>, state &lt;&lt; <span class="number">1</span>);       <span class="comment">//不选第now个数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	dfs(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+        <tag>位运算</tag>
       </tags>
   </entry>
   <entry>
