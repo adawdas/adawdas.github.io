@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="dp," />
 
 
 
@@ -105,16 +105,17 @@
 
 
 
-<meta name="description" content="MySQL基础内容">
+<meta name="description" content="原题链接：Acwing272">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql">
-<meta property="og:url" content="http://yoursite.com/2020/03/11/mysql/index.html">
+<meta property="og:title" content="最长公共上升子序列 acwing 272">
+<meta property="og:url" content="http://yoursite.com/2020/04/07/ac272/index.html">
 <meta property="og:site_name" content="Adawdas">
-<meta property="og:description" content="MySQL基础内容">
+<meta property="og:description" content="原题链接：Acwing272">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-11T14:04:46.000Z">
-<meta property="article:modified_time" content="2020-04-05T08:15:13.947Z">
+<meta property="article:published_time" content="2020-04-07T09:12:49.000Z">
+<meta property="article:modified_time" content="2020-04-06T16:44:44.796Z">
 <meta property="article:author" content="adawdas">
+<meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
 
 
@@ -145,13 +146,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/11/mysql/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/07/ac272/"/>
 
 
 
 
 
-  <title>mysql | Adawdas</title>
+  <title>最长公共上升子序列 acwing 272 | Adawdas</title>
   
 
 
@@ -292,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/mysql/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/07/ac272/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="adawdas">
@@ -309,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mysql</h1>
+          <h1 class="post-title" itemprop="name headline">最长公共上升子序列 acwing 272</h1>
         
 
         <div class="post-meta">
@@ -321,8 +322,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-11T22:04:46+08:00">
-                2020-03-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-07T17:12:49+08:00">
+                2020-04-07
               </time>
             
 
@@ -344,8 +345,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛</span>
                   </a>
                 </span>
 
@@ -381,13 +382,42 @@
       
 
       
-        <p>MySQL基础内容</p>
+        <p>原题链接：<a href="https://www.acwing.com/problem/content/274/" target="_blank" rel="noopener">Acwing272</a></p>
 <a id="more"></a>
-<h1 id="MySQL-学习笔记"><a href="#MySQL-学习笔记" class="headerlink" title="MySQL 学习笔记"></a>MySQL 学习笔记</h1><h3 id="登录和退出MySQL服务器"><a href="#登录和退出MySQL服务器" class="headerlink" title="登录和退出MySQL服务器"></a>登录和退出MySQL服务器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登录MySQL</span></span><br><span class="line">$ mysql -u root -p12345612</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出MySQL数据库服务器</span></span><br><span class="line">exit;</span><br></pre></td></tr></table></figure>
+<p>最长公共子序列：<a href="https://www.acwing.com/problem/content/899/" target="_blank" rel="noopener">Acwing897</a></p>
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>熊大妈的奶牛在小沐沐的熏陶下开始研究信息题目。</p>
+<p>小沐沐先让奶牛研究了最长上升子序列，再让他们研究了最长公共子序列，现在又让他们研究最长公共上升子序列了。</p>
+<p>小沐沐说，对于两个数列A和B，如果它们都包含一段位置不一定连续的数，且数值是严格递增的，那么称这一段数是两个数列的公共上升子序列，而所有的公共上升子序列中最长的就是最长公共上升子序列了。</p>
+<p>奶牛半懂不懂，小沐沐要你来告诉奶牛什么是最长公共上升子序列。</p>
+<p>不过，只要告诉奶牛它的长度就可以了。</p>
+<p>数列A和B的长度均不超过3000。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行包含一个整数N，表示数列A，B的长度。</p>
+<p>第二行包含N个整数，表示数列A。</p>
+<p>第三行包含N个整数，表示数列B。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示最长公共子序列的长度</p>
+<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤N≤3000,序列中的数字均不超过231−1</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">2 2 1 3</span><br><span class="line">2 1 2 3</span><br></pre></td></tr></table></figure>
 
-<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 显示所有数据库</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建数据库</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">test</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 切换数据库</span></span><br><span class="line"><span class="keyword">use</span> <span class="keyword">test</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 显示数据表</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> pet (</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    owner <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    species <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    sex <span class="built_in">CHAR</span>(<span class="number">1</span>),</span><br><span class="line">    birth <span class="built_in">DATE</span>,</span><br><span class="line">    death <span class="built_in">DATE</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看数据表结构</span></span><br><span class="line"><span class="comment">-- describe pet;</span></span><br><span class="line">desc pet;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询表</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">from</span> pet;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 插入数据</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> pet <span class="keyword">VALUES</span> (<span class="string">'puffball'</span>, <span class="string">'Diane'</span>, <span class="string">'hamster'</span>, <span class="string">'f'</span>, <span class="string">'1990-03-30'</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改数据</span></span><br><span class="line"><span class="keyword">UPDATE</span> pet <span class="keyword">SET</span> <span class="keyword">name</span> = <span class="string">'squirrel'</span> <span class="keyword">where</span> owner = <span class="string">'Diane'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除数据</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> pet <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'squirrel'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> myorder;</span><br></pre></td></tr></table></figure>
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
 
-<h3 id="建表约束"><a href="#建表约束" class="headerlink" title="建表约束"></a>建表约束</h3><h4 id="主键约束"><a href="#主键约束" class="headerlink" title="主键约束"></a>主键约束</h4>
+<h3 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h3><p><code>f[i][j]</code>为所有 <code>a[1~i]</code>和<code>b[1~j]</code>且以<code>b[j]</code>结尾的公共上升序列<br><code>f[i][j]</code>表示集合中的最大值</p>
+<p>对此，我们分两种情况讨论<br>1.. <code>f[i][j]</code>不包含 <code>a[i]</code> , 此时集合 <code>f[i][j]</code>等价于 集合<code>f[i-1][j]</code></p>
+<p>2.. <code>f[i][j]</code>包含了<code>a[i]</code>, 此时集合<code>f[i][j]</code>的值将被更新,此时应当枚举所有<code>a[1~i-1]</code>且以<code>b[1~j-1]</code>结尾的集合，即枚举<code>f[i-1][1~j-1]</code><br>若倒数第二数是以<code>j-1</code>结尾的，那么<code>f[i][j]=f[i-1][j-1]+1</code><br>若倒数第二数是以<code>j-2</code>结尾的，那么<code>f[i][j]=f[i-1][j-2]+1</code><br>…</p>
+<p>这种方法的时间复杂度将是<code>O(n^3)</code></p>
+<h3 id="优化一"><a href="#优化一" class="headerlink" title="优化一"></a>优化一</h3><p>经过观察我们发现，每次的<code>maxv</code>是满足<code>a[i]&gt;b[k]</code>的<code>f[i-1][k]+1</code>的前缀最大值，因此我们可以将<code>maxv</code>直接提到第一层循环的外面，这样时间复杂度将会降为<code>O(n^2)</code></p>
+<h3 id="优化二"><a href="#优化二" class="headerlink" title="优化二"></a>优化二</h3><p>分析状态转移方程可知<code>f[i][j]</code>都是由<code>f[i-1][j]</code>得来的，因此可以优化空间，设<code>f[i]</code>代表的是<code>a</code>序列前<code>i</code>个元素与b序列的<code>LCIS</code>长度，<code>t</code>为最长<code>LCIS</code>的结尾元素位置</p>
+<p>原始代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3010</span>;</span><br><span class="line"><span class="keyword">int</span> dp[N][N];</span><br><span class="line"><span class="keyword">int</span> a[N], b[N];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; b[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][j] = dp[i - <span class="number">1</span>][j];</span><br><span class="line">			<span class="keyword">if</span> (a[i] == b[j])</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> maxv = <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= j - <span class="number">1</span>; k++)</span><br><span class="line">					<span class="keyword">if</span> (b[k] &lt; b[j])</span><br><span class="line">						res = max(dp[i - <span class="number">1</span>][k] + <span class="number">1</span>, maxv);</span><br><span class="line">				dp[i][j] = max(dp[i][j], maxv);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		res = max(res, dp[n][i]);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优化一</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3010</span>;</span><br><span class="line"><span class="keyword">int</span> dp[N][N];</span><br><span class="line"><span class="keyword">int</span> a[N], b[N];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; b[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> maxv = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][j] = dp[i - <span class="number">1</span>][j];</span><br><span class="line">			<span class="keyword">if</span> (a[i] == b[j])</span><br><span class="line">				dp[i][j] = max(dp[i][j], maxv);</span><br><span class="line">			<span class="keyword">if</span> (b[j] &lt; a[i])</span><br><span class="line">				res = max(dp[i - <span class="number">1</span>][j] + <span class="number">1</span>, maxv);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		res = max(res, dp[n][i]);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>优化二</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3010</span>;</span><br><span class="line"><span class="keyword">int</span> dp[N];</span><br><span class="line"><span class="keyword">int</span> a[N], b[N];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; b[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[i] == b[j])</span><br><span class="line">				dp[j] = dp[t] + <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span> (b[j] &lt; a[i] &amp;&amp; dp[j] &gt; dp[t])</span><br><span class="line">				t = j;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		res = max(res, dp[i]);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>LCS</code>(最长公共子序列)<br><code>f[i][j]=f[i-1][j-1]+1  (a[i]=a[j])</code><br><code>f[i][j]=max(f[i][j-1],f[i-1][j])  (a[i]!=a[j])</code><br>其中，<code>f[i][j]</code>为<code>a</code>序列的前<code>i</code>个元素和<code>b</code>序列的前<code>j</code>个元素的<code>LCS</code>长度</p>
+<p><code>LIS</code>(最长上升子序列)<br><code>f[i] = max f[j]+1(a[j]&lt;a[i],j&lt;i)</code><br>f[i]为以第i个元素结尾的LISLIS长度。</p>
+<p><code>LCIS</code>(最长公共上升子序列)<br><code>f[i][j]=f[i-1][j](a[i]!=b[j])</code><br><code>f[i][j]=max(f[i-1][j],f[i-1][t]+1) (a[i]=b[j])</code><br><code>f[i][j]</code>代表的是<code>a</code>序列前<code>i</code>个元素与<code>b</code>序列前<code>j</code>个元素的<code>LCIS</code>长度，<code>t</code>为最长<code>LCIS</code>的结尾元素位置</p>
+<p>优化<br><code>f[i]=f[t]+1(a[i]=b[j])</code><br><code>f[i]</code>代表的是<code>a</code>序列前<code>i</code>个元素与<code>b</code>序列的<code>LCIS</code>长度，<code>t</code>为最长<code>LCIS</code>的结尾元素位置</p>
+
       
     </div>
     
@@ -402,6 +432,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/dp/" rel="tag"> <i class="fa fa-tag"></i> dp</a>
+          
+        </div>
+      
 
       
       
@@ -411,8 +447,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/19/html1/" rel="next" title="html1">
-                <i class="fa fa-chevron-left"></i> html1
+              <a href="/2020/03/28/segmenttree/" rel="next" title="线段树的基本操作">
+                <i class="fa fa-chevron-left"></i> 线段树的基本操作
               </a>
             
           </div>
@@ -420,10 +456,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/16/ac273/" rel="prev" title="分级 acwing 273">
-                分级 acwing 273 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -557,7 +589,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL-学习笔记"><span class="nav-number">1.</span> <span class="nav-text">MySQL 学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#登录和退出MySQL服务器"><span class="nav-number">1.0.1.</span> <span class="nav-text">登录和退出MySQL服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本语法"><span class="nav-number">1.0.2.</span> <span class="nav-text">基本语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建表约束"><span class="nav-number">1.0.3.</span> <span class="nav-text">建表约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主键约束"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">主键约束</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式"><span class="nav-number">3.</span> <span class="nav-text">输出格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据范围"><span class="nav-number">3.1.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入样例："><span class="nav-number">3.2.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出样例："><span class="nav-number">3.3.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态表示"><span class="nav-number">3.4.</span> <span class="nav-text">状态表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化一"><span class="nav-number">3.5.</span> <span class="nav-text">优化一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化二"><span class="nav-number">3.6.</span> <span class="nav-text">优化二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
