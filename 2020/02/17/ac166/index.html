@@ -112,13 +112,13 @@
 <meta property="og:site_name" content="Adawdas">
 <meta property="og:description" content="原题链接：Acwing166">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/shudu.png">
+<meta property="og:image" content="http://yoursite.com/images/shudu.png">
 <meta property="article:published_time" content="2020-02-17T09:12:49.000Z">
-<meta property="article:modified_time" content="2020-04-05T09:29:27.816Z">
+<meta property="article:modified_time" content="2020-04-06T03:40:01.402Z">
 <meta property="article:author" content="adawdas">
 <meta property="article:tag" content="dfs">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/shudu.png">
+<meta name="twitter:image" content="http://yoursite.com/images/shudu.png">
 
 
 
@@ -131,7 +131,7 @@
     sidebar: {"position":"left","display":"post","offset":15,"b2t":false,"scrollpercent":false,"onmobile":true},
     fancybox: true,
     tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":true,"transition":{"post_body":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: 'Author'
@@ -389,7 +389,7 @@
 
 <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>数独是一种传统益智游戏，你需要把一个9 × 9的数独补充完整，使得图中每行、每列、每个3 × 3的九宫格内数字1~9均恰好出现一次。</p>
 <p>请编写一个程序填写数独。</p>
-<p><img src="/shudu.png" alt="alt"></p>
+<p><img src="/images/shudu.png" alt="alt"></p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入包含多组测试用例。</p>
 <p>每个测试用例占一行，包含81个字符，代表数独的81个格内数据（顺序总体由上到下，同行由左到右）。</p>
 <p>每个字符都是一个数字（1-9）或一个”.”（表示尚未填充）。</p>
@@ -437,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/17/ac170/" rel="next" title="加成序列 acwing 170">
-                <i class="fa fa-chevron-left"></i> 加成序列 acwing 170
+              <a href="/2020/02/17/ac168/" rel="next" title="生日蛋糕 acwing 168">
+                <i class="fa fa-chevron-left"></i> 生日蛋糕 acwing 168
               </a>
             
           </div>
@@ -447,8 +447,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/17/ac168/" rel="prev" title="生日蛋糕 acwing 168">
-                生日蛋糕 acwing 168 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/02/17/ac165/" rel="prev" title="小猫爬山 acwing 165">
+                小猫爬山 acwing 165 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -711,75 +711,7 @@
   <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
 
 
-    <style>
-    .copy-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 20px;
-      color: #333;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: #eee;
-      background-image: linear-gradient(#fcfcfc, #eee);
-      border: 1px solid #d5d5d5;
-      border-radius: 3px;
-      user-select: none;
-      outline: 0;
-    }
- 
-    .highlight-wrap .copy-btn {
-      transition: opacity .3s ease-in-out;
-      opacity: 0;
-      padding: 2px 6px;
-      position: absolute;
-      right: 4px;
-      top: 8px;
-    }
- 
-    .highlight-wrap:hover .copy-btn,
-    .highlight-wrap .copy-btn:focus {
-      opacity: 1
-    }
- 
-    .highlight-wrap {
-      position: relative;
-    }
-  </style>
- 
-  <script>
-    $('.highlight').each(function (i, e) {
-      var $wrap = $('<div>').addClass('highlight-wrap')
-      $(e).after($wrap)
-      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
-        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
-          return $(e).text()
-        }).toArray().join('\n')
-        var ta = document.createElement('textarea')
-        document.body.appendChild(ta)
-        ta.style.position = 'absolute'
-        ta.style.top = '0px'
-        ta.style.left = '0px'
-        ta.value = code
-        ta.select()
-        ta.focus()
-        var result = document.execCommand('copy')
-        document.body.removeChild(ta)
- 
-        if(result)$(this).text('复制成功')
-        else $(this).text('复制失败')
- 
-        $(this).blur()
-      })).on('mouseleave', function (e) {
-        var $b = $(this).find('.copy-btn')
-        setTimeout(function () {
-          $b.text('复制')
-        }, 300)
-      }).append(e)
-    })
-  </script>
+  
 
 
   
