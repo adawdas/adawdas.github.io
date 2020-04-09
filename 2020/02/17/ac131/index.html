@@ -114,7 +114,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/ac131.png">
 <meta property="article:published_time" content="2020-02-17T09:12:49.000Z">
-<meta property="article:modified_time" content="2020-04-05T09:28:47.940Z">
+<meta property="article:modified_time" content="2020-04-09T16:15:15.808Z">
 <meta property="article:author" content="adawdas">
 <meta property="article:tag" content="单调栈">
 <meta name="twitter:card" content="summary">
@@ -387,21 +387,21 @@
         <p>原题链接：<a href="https://www.acwing.com/problem/content/133/" target="_blank" rel="noopener">Acwing131</a></p>
 <a id="more"></a>
 
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>直方图是由在公共基线处对齐的一系列矩形组成的多边形。</p>
+<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>直方图是由在公共基线处对齐的一系列矩形组成的多边形。</p>
 <p>矩形具有相等的宽度，但可以具有不同的高度。</p>
 <p>例如，图例左侧显示了由高度为2,1,4,5,1,3,3的矩形组成的直方图，矩形的宽度都为1：</p>
 <p><img src="/ac131.png" alt="alt"></p>
 <p>通常，直方图用于表示离散分布，例如，文本中字符的频率。</p>
 <p>现在，请你计算在公共基线处对齐的直方图中最大矩形的面积。</p>
 <p>图例右图显示了所描绘直方图的最大对齐矩形。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入包含几个测试用例。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>输入包含几个测试用例。</p>
 <p>每个测试用例占据一行，用以描述一个直方图，并以整数n开始，表示组成直方图的矩形数目。</p>
 <p>然后跟随n个整数h1，…，hn。</p>
 <p>这些数字以从左到右的顺序表示直方图的各个矩形的高度。</p>
 <p>每个矩形的宽度为1。</p>
 <p>同行数字用空格隔开。</p>
 <p>当输入用例为n=0时，结束输入，且该用例不用考虑。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每一个测试用例，输出一个整数，代表指定直方图中最大矩形的区域面积。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>对于每一个测试用例，输出一个整数，代表指定直方图中最大矩形的区域面积。</p>
 <p>每个数据占一行。</p>
 <p>请注意，此矩形必须在公共基线处对齐。</p>
 <h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤n≤100000,<br>0≤hi≤1000000000</p>
@@ -413,8 +413,7 @@
 
 
 
-<p>代码</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">101010</span>;</span><br><span class="line">ll n, p, len, res, a[N], s[N], w[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n, n)</span><br><span class="line">	&#123;</span><br><span class="line">		res = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">		a[n + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">		p = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (s[p] &lt; a[i])<span class="comment">//保证栈中是递增序列</span></span><br><span class="line">			&#123;</span><br><span class="line">				s[++p] = a[i];</span><br><span class="line">				w[p] = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				len = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">while</span> (s[p] &gt; a[i])</span><br><span class="line">				&#123;</span><br><span class="line">					len += w[p];</span><br><span class="line">					res = max(res, s[p] * len);</span><br><span class="line">					p--;</span><br><span class="line">				&#125;</span><br><span class="line">				s[++p] = a[i];</span><br><span class="line">				w[p] = len + <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">101010</span>;</span><br><span class="line">ll n, p, len, res, a[N], s[N], w[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n, n)</span><br><span class="line">	&#123;</span><br><span class="line">		res = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">		a[n + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">		p = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (s[p] &lt; a[i])<span class="comment">//保证栈中是递增序列</span></span><br><span class="line">			&#123;</span><br><span class="line">				s[++p] = a[i];</span><br><span class="line">				w[p] = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				len = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">while</span> (s[p] &gt; a[i])</span><br><span class="line">				&#123;</span><br><span class="line">					len += w[p];</span><br><span class="line">					res = max(res, s[p] * len);</span><br><span class="line">					p--;</span><br><span class="line">				&#125;</span><br><span class="line">				s[++p] = a[i];</span><br><span class="line">				w[p] = len + <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -445,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/17/ac139/" rel="next" title="回文子串的最大长度 acwing 139">
-                <i class="fa fa-chevron-left"></i> 回文子串的最大长度 acwing 139
+              <a href="/2020/02/17/ac138/" rel="next" title="兔子与兔子 acwing 138">
+                <i class="fa fa-chevron-left"></i> 兔子与兔子 acwing 138
               </a>
             
           </div>
@@ -455,8 +454,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/17/ac110/" rel="prev" title="防晒 acwing 110">
-                防晒 acwing 110 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/02/17/ac128/" rel="prev" title="编辑器 acwing 128">
+                编辑器 acwing 128 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -591,7 +590,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式"><span class="nav-number">3.</span> <span class="nav-text">输出格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据范围"><span class="nav-number">3.1.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入样例："><span class="nav-number">3.2.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出样例："><span class="nav-number">3.3.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单调栈"><span class="nav-number">3.4.</span> <span class="nav-text">单调栈</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出格式"><span class="nav-number">3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据范围"><span class="nav-number">4.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入样例："><span class="nav-number">5.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出样例："><span class="nav-number">6.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单调栈"><span class="nav-number">7.</span> <span class="nav-text">单调栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">8.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
