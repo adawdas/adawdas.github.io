@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="dp," />
 
 
 
@@ -105,14 +105,17 @@
 
 
 
+<meta name="description" content="原题链接：Acwing288">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ac288">
+<meta property="og:title" content="休息时间 acwing 288">
 <meta property="og:url" content="http://yoursite.com/2020/04/12/ac288/index.html">
 <meta property="og:site_name" content="Adawdas">
+<meta property="og:description" content="原题链接：Acwing288">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-12T03:26:45.000Z">
-<meta property="article:modified_time" content="2020-04-12T03:26:45.523Z">
+<meta property="article:published_time" content="2020-04-12T06:12:24.000Z">
+<meta property="article:modified_time" content="2020-04-12T07:26:09.095Z">
 <meta property="article:author" content="adawdas">
+<meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
 
 
@@ -149,7 +152,7 @@
 
 
 
-  <title>ac288 | Adawdas</title>
+  <title>休息时间 acwing 288 | Adawdas</title>
   
 
 
@@ -307,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ac288</h1>
+          <h1 class="post-title" itemprop="name headline">休息时间 acwing 288</h1>
         
 
         <div class="post-meta">
@@ -319,7 +322,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-12T11:26:45+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-12T14:12:24+08:00">
                 2020-04-12
               </time>
             
@@ -329,6 +332,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -357,7 +382,31 @@
       
 
       
-        
+        <p>原题链接：<a href="https://www.acwing.com/problem/content/290/" target="_blank" rel="noopener">Acwing288</a></p>
+<a id="more"></a>
+
+<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>在某个星球上，一天由 N 个小时构成，我们称0点到1点为第1个小时、1点到2点为第2个小时，以此类推。</p>
+<p>在第 i 个小时睡觉能够恢复Ui点体力。</p>
+<p>在这个星球上住着一头牛，它每天要休息B个小时。</p>
+<p>它休息的这B个小时不一定连续，可以分成若干段，但是在每段的第一个小时，它需要从清醒逐渐入睡，不能恢复体力，从下一个小时开始才能睡着。</p>
+<p>为了身体健康，这头牛希望遵循生物钟，每天采用相同的睡觉计划。</p>
+<p>另外，因为时间是连续的，即每一天的第N个小时和下一天的第1个小时是相连的（N点等于0点），这头牛只需要在每N个小时内休息够B个小时就可以了。</p>
+<p>请你帮忙给这头牛安排一个睡觉计划，使它每天恢复的体力最多。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>第1行输入两个空格隔开的整数N和B。</p>
+<p>第2..N+1行，第 i+1 行包含一个整数Ui。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出一个整数，表示恢复的体力值。</p>
+<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>3≤N≤3830<br>2≤B&lt;N<br>0≤Ui≤200000</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5 3</span><br><span class="line">2</span><br><span class="line">0</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例解释"><a href="#样例解释" class="headerlink" title="样例解释"></a>样例解释</h3><p>这头牛每天3点入睡，睡到次日1点，即[1,4,2]时间段休息，每天恢复体力值最大，为0+4+2=6。</p>
+<h3 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h3><p><code>f[i][j][0]</code>表示第i小时一共睡了j小时且第i小时没有在睡觉的集合<br><code>f[i][j][1]</code>表示第i小时一共睡了j小时且第i小时在睡觉的集合<br>易得状态转移方程<br><code>f[i][j][0]=max(f[i-1][j][0],f[i-1][j][1])</code><br><code>f[i][j][1]=max(f[i-1][j-1][0],f[i-1][j-1][1]+w[i])</code></p>
+<p>为了区分是否跨越了一天，这里对第N小时的情况进行了划分：<br>若第N小时在睡觉，同时第1小时在睡觉，那么第一小时可以恢复体力<br>其余情况下第一小时均不可恢复体力<br>故有初始状态为<br><code>f[1][0][0]=0,f[1][1][1]=0</code> (第N小时没有睡觉)<br><code>f[1][0][0]=0,f[1][1][1]=w[i]</code> (第N小时在睡觉)</p>
+<p>最终结果为对第一个初始状态求出的<code>f[n][m][0]</code><br>和对第二个初始状态求出的<code>f[n][m][1]</code>取最大值</p>
+<p>因空间限制，本题采用了滚动数组</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">4000</span>, INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">2</span>][N][<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> w[N];</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span>(f));</span><br><span class="line">    f[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    f[<span class="number">1</span>][<span class="number">1</span>][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n;i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            f[i &amp; <span class="number">1</span>][j][<span class="number">0</span>] = max(f[i - <span class="number">1</span> &amp; <span class="number">1</span>][j][<span class="number">0</span>], f[i - <span class="number">1</span> &amp; <span class="number">1</span>][j][<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span>(j)</span><br><span class="line">                f[i &amp; <span class="number">1</span>][j][<span class="number">1</span>] = max(f[i - <span class="number">1</span> &amp; <span class="number">1</span>][j - <span class="number">1</span>][<span class="number">0</span>], f[i - <span class="number">1</span> &amp; <span class="number">1</span>][j - <span class="number">1</span>][<span class="number">1</span>] + w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">int</span> res = f[n &amp; <span class="number">1</span>][m][<span class="number">0</span>];</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span>(f));</span><br><span class="line">    f[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    f[<span class="number">1</span>][<span class="number">1</span>][<span class="number">1</span>] = w[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n;i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            f[i &amp; <span class="number">1</span>][j][<span class="number">0</span>] = max(f[i - <span class="number">1</span> &amp; <span class="number">1</span>][j][<span class="number">0</span>], f[i - <span class="number">1</span> &amp; <span class="number">1</span>][j][<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span>(j)</span><br><span class="line">                f[i &amp; <span class="number">1</span>][j][<span class="number">1</span>] = max(f[i - <span class="number">1</span> &amp; <span class="number">1</span>][j - <span class="number">1</span>][<span class="number">0</span>], f[i - <span class="number">1</span> &amp; <span class="number">1</span>][j - <span class="number">1</span>][<span class="number">1</span>] + w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    res = max(res, f[n &amp; <span class="number">1</span>][m][<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -371,6 +420,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dp/" rel="tag"> <i class="fa fa-tag"></i> dp</a>
+          
+        </div>
       
 
       
@@ -391,8 +446,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/04/12/ac280/" rel="prev" title="陪审团 acwing 280">
-                陪审团 acwing 280 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/04/12/ac289/" rel="prev" title="环路运输 acwing 289">
+                环路运输 acwing 289 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -447,8 +502,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -463,7 +527,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -508,6 +572,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出格式"><span class="nav-number">3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据范围"><span class="nav-number">4.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入样例："><span class="nav-number">5.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出样例："><span class="nav-number">6.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样例解释"><span class="nav-number">7.</span> <span class="nav-text">样例解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态表示"><span class="nav-number">8.</span> <span class="nav-text">状态表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">9.</span> <span class="nav-text">代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
