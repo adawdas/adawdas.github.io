@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="贪心," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -105,17 +105,12 @@
 
 
 
-<meta name="description" content="原题链接：Acwing110">
-<meta property="og:type" content="article">
-<meta property="og:title" content="防晒 acwing 110">
-<meta property="og:url" content="http://yoursite.com/2020/02/17/ac110/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Adawdas">
+<meta property="og:url" content="http://yoursite.com/archives/2020/04/page/2/index.html">
 <meta property="og:site_name" content="Adawdas">
-<meta property="og:description" content="原题链接：Acwing110">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-02-17T09:12:49.000Z">
-<meta property="article:modified_time" content="2020-04-09T16:14:07.922Z">
 <meta property="article:author" content="adawdas">
-<meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary">
 
 
@@ -146,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/02/17/ac110/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2020/04/page/2/"/>
 
 
 
 
 
-  <title>防晒 acwing 110 | Adawdas</title>
+  <title>Archive | Adawdas</title>
   
 
 
@@ -171,7 +166,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -279,194 +274,114 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+         
+          
+        Nice! 55 posts in total. Keep on posting.
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2020">2020</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/17/ac110/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="adawdas">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Adawdas">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2020/04/08/ac282/" itemprop="url">
+              
+                <span itemprop="name">石子合并 acwing 282</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">防晒 acwing 110</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-17T17:12:49+08:00">
-                2020-02-17
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-04-08T12:11:43+08:00"
+              content="2020-04-08" >
+          04-08
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>原题链接：<a href="https://www.acwing.com/problem/content/112/" target="_blank" rel="noopener">Acwing110</a></p>
-<a id="more"></a>
-
-<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>有C头奶牛进行日光浴，第i头奶牛需要minSPF[i]到maxSPF[i]单位强度之间的阳光。<br>每头奶牛在日光浴前必须涂防晒霜，防晒霜有L种，涂上第i种之后，身体接收到的阳光强度就会稳定为SPF[i]，第i种防晒霜有cover[i]瓶。<br>求最多可以满足多少头奶牛进行日光浴。</p>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>第一行输入整数C和L。</p>
-<p>接下来的C行，按次序每行输入一头牛的minSPF和maxSPF值,即第i行输入minSPF[i]和maxSPF[i]。</p>
-<p>再接下来的L行，按次序每行输入一种防晒霜的SPF和cover值,即第i行输入SPF[i]和cover[i]。</p>
-<p>每行的数据之间用空格隔开。</p>
-<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出一个整数，代表最多可以满足奶牛日光浴的奶牛数目。</p>
-<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤C,L≤2500 ,<br>1≤minSPF≤maxSPF≤1000,<br>1≤SPF≤1000</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">3 2</span><br><span class="line">3 10</span><br><span class="line">2 5</span><br><span class="line">1 5</span><br><span class="line">6 2</span><br><span class="line">4 1</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
-
-<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><p>(贪心) O(nlogn)</p>
-<p>算法流程：</p>
-<ol>
-<li>将所有奶牛按照 minSPF 从大到小的顺序排序，然后依次考虑每头奶牛；</li>
-<li>对于每头奶牛，扫描当前所有能用的防晒霜，选择 SPF 值最大的防晒霜来用；</li>
-</ol>
-<p>根据匈牙利算法的原理，如果一个匹配不存在增广路径，则该匹配是二分图的一个最大匹配。下面我们来证明按照上述做法得到的匹配方案，不存在增广路径。<br>运用反证法证明，上述方法得到的匹配方案不存在增广路径。<br>假设有某瓶未被防晒霜可以与第k头牛匹配，那么它必然不能和小于k的牛<br>匹配，否则根据算法思路，它必然已经被小于k的牛使用了。故若存在<br>增广路径，那么它只能与k以上的牛匹配，如果存在增广路径，那么第一头<br>牛在一开始必然没有匹配，这与算法矛盾，因为最上面的牛应当最先匹配一个<br>点，所以原算法不存在增广路径</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;PII;</span><br><span class="line">priority_queue&lt;PII, <span class="built_in">vector</span>&lt;PII&gt;, less&lt;PII&gt;&gt; q;</span><br><span class="line">PII p[<span class="number">2510</span>];</span><br><span class="line"><span class="keyword">int</span> C, L, minSPF, maxSPF, SPF, cover, counts, tempi, j;</span><br><span class="line">PII tempp;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(PII a, PII b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.first &gt; b.first;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; C &gt;&gt; L;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; C; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; minSPF &gt;&gt; maxSPF;</span><br><span class="line">		q.push(&#123; minSPF,maxSPF &#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; L; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; p[i].first &gt;&gt; p[i].second;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	sort(p, p + L, cmp);</span><br><span class="line">	<span class="keyword">while</span> (!q.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		tempp = q.top();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; L; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (p[j].first &gt;= tempp.first&amp;&amp;p[j].first &lt;= tempp.second&amp;&amp;p[j].second != <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				counts++;</span><br><span class="line">				p[j].second--;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		q.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; counts &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    
-    
-    <div style="text-align:center;color: #ccc;font-size:14px;">---------------- The End ----------------</div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"> <i class="fa fa-tag"></i> 贪心</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/02/17/8queen/" rel="next" title="2n皇后">
-                <i class="fa fa-chevron-left"></i> 2n皇后
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/02/19/html1/" rel="prev" title="html1">
-                html1 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2020/04/07/ac272/" itemprop="url">
+              
+                <span itemprop="name">最长公共上升子序列 acwing 272</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-04-07T17:12:49+08:00"
+              content="2020-04-07" >
+          04-07
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
     </div>
   </div>
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2020/04/">&lt;&lt;</a><a class="page-number" href="/archives/2020/04/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
 
 
           </div>
@@ -474,10 +389,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -500,17 +411,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -570,22 +472,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出格式"><span class="nav-number">3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据范围"><span class="nav-number">4.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入样例："><span class="nav-number">5.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出样例："><span class="nav-number">6.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路："><span class="nav-number">7.</span> <span class="nav-text">思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">8.</span> <span class="nav-text">代码</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -722,10 +608,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
