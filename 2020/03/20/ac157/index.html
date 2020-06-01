@@ -382,9 +382,7 @@
       
 
       
-        <p>原题链接：<a href="https://www.acwing.com/problem/content/159/" target="_blank" rel="noopener">Acwing157</a></p>
-<a id="more"></a>
-
+        <p>原题链接：<a href="https://www.acwing.com/problem/content/159/" target="_blank" rel="noopener">Acwing157</a><br><a id="more"></a></p>
 <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>一些主要城市拥有树形的地铁系统，即在任何一对车站之间，有且只有一种方式可以乘坐地铁。</p>
 <p>此外，这些城市大多数都有一个中央车站。</p>
 <p>想象一下，你是一名在拥有树形地铁系统的城市游玩的游客，你想探索该城市完整的地铁线路。</p>
@@ -400,9 +398,7 @@
 <p>否则，输出different。</p>
 <p>每行输出一个结果</p>
 <h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">0010011101001011</span><br><span class="line">0100011011001011</span><br><span class="line">0100101100100111</span><br><span class="line">0011000111010101</span><br></pre></td></tr></table></figure>
-
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">same</span><br><span class="line">different</span><br></pre></td></tr></table></figure>
-
 <h3 id="树的最小表示"><a href="#树的最小表示" class="headerlink" title="树的最小表示"></a>树的最小表示</h3><p>题意：给定n组数据，每个数据表示两个dfs序列，0表示向下走，1表示向上走，问这两棵树是不是同构的</p>
 <p>判断方式：求出每个树的最小表示，即与这棵树同构的最小dfs序。如果这两棵树同构，那么它们的最小表示应该相同</p>
 <p>求树的最小表示可以递归实现，求出所有子树的dfs序，然后从小到大排序拼接</p>
@@ -528,7 +524,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -550,7 +546,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1103,6 +1099,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

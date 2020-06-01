@@ -385,9 +385,7 @@
       
 
       
-        <p>原题链接：<a href="https://www.acwing.com/problem/content/1147/" target="_blank" rel="noopener">Acwing1145</a></p>
-<a id="more"></a>
-
+        <p>原题链接：<a href="https://www.acwing.com/problem/content/1147/" target="_blank" rel="noopener">Acwing1145</a><br><a id="more"></a></p>
 <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>北极的某区域共有 n 座村庄，每座村庄的坐标用一对整数 (x,y) 表示。</p>
 <p>为了加强联系，决定在村庄之间建立通讯网络，使每两座村庄之间都可以直接或间接通讯。</p>
 <p>通讯工具可以是无线电收发机，也可以是卫星设备。</p>
@@ -405,9 +403,7 @@
 <h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>一个实数，表示最小的 d 值，结果保留 2 位小数。</p>
 <h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤n≤500,<br>0≤x,y≤1e4,<br>0≤k≤100</p>
 <h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3 2</span><br><span class="line">10 10</span><br><span class="line">10 0</span><br><span class="line">30 0</span><br></pre></td></tr></table></figure>
-
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10.00</span><br></pre></td></tr></table></figure>
-
 <h3 id="题意分析"><a href="#题意分析" class="headerlink" title="题意分析"></a>题意分析</h3><p>对于所有节点，若两节点之间有卫星设备，那么它们之间的距离为0，否则一点可以直接到达或经过中间点到达另一点<br>已知提供了k台卫星设备，求所有的路径中每段路径（两节点之间的距离）的最大值 的可能的最小值。（求最小生成树的最大边权的最小值）</p>
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p><code>kruskal</code>算法 ： <code>kruskal</code>算法每次取出的都是权值最小的边，我们使用<code>kruskal</code>算法从小到大枚举所有的边直到枚举了<code>n-k</code>条边。此时还有<code>k-1</code>条边没有加入，意味着此时还有<code>k</code>个孤立块(同属于一个并查集为一块)，每一块上设置一台卫星设备，刚好使用完<code>k</code>台。<br>因<code>kruskal</code>中边是按边权从小到大顺序枚举的，所以剩下的边的权值一定大于已经加入的所有边的权值，所以当前方案一定是最优解</p>
 <h3 id="代码-kruskal"><a href="#代码-kruskal" class="headerlink" title="代码(kruskal)"></a>代码(kruskal)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">double</span>, <span class="keyword">double</span>&gt; pdd;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">510</span>, M = N * N / <span class="number">2</span>;</span><br><span class="line"><span class="keyword">int</span> p[N];</span><br><span class="line">pdd s[N];</span><br><span class="line"><span class="keyword">int</span> n, k;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    <span class="keyword">double</span> w;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> edge &amp;t)<span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> w &lt; t.w;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; e[M];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p[x]==x)</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> p[x] = get(p[x]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getdist</span><span class="params">(pdd p1,pdd p2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sqrt</span>((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</span><br><span class="line">        p[i] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; s[i].x &gt;&gt; s[i].y;</span><br><span class="line">    <span class="keyword">int</span> tt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; i;j++)</span><br><span class="line">            e[tt++] = &#123;j, i, getdist(s[i], s[j])&#125;;</span><br><span class="line">    sort(e, e + tt);</span><br><span class="line">    <span class="keyword">int</span> cnt = n;</span><br><span class="line">    <span class="keyword">double</span> res;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; tt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(cnt&lt;=k)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">int</span> a = get(e[i].a);</span><br><span class="line">        <span class="keyword">int</span> b = get(e[i].b);</span><br><span class="line">        <span class="keyword">double</span> w = e[i].w;</span><br><span class="line">        <span class="keyword">if</span>(a!=b)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt--;</span><br><span class="line">            p[a] = b;</span><br><span class="line">            res = w;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.2f\n"</span>, res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -442,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/23/ac1146/" rel="next" title="新的开始 acwing 1146">
-                <i class="fa fa-chevron-left"></i> 新的开始 acwing 1146
+              <a href="/2020/04/22/ac1141/" rel="next" title="局域网 acwing 1141">
+                <i class="fa fa-chevron-left"></i> 局域网 acwing 1141
               </a>
             
           </div>
@@ -452,8 +448,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/04/25/ac904/" rel="prev" title="虫洞 acwing 904">
-                虫洞 acwing 904 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/04/23/ac1146/" rel="prev" title="新的开始 acwing 1146">
+                新的开始 acwing 1146 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,7 +529,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -555,7 +551,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1108,6 +1104,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

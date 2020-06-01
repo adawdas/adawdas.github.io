@@ -384,9 +384,7 @@
       
 
       
-        <p>原题链接：<a href="https://www.acwing.com/problem/content/342/" target="_blank" rel="noopener">Acwing340</a></p>
-<a id="more"></a>
-
+        <p>原题链接：<a href="https://www.acwing.com/problem/content/342/" target="_blank" rel="noopener">Acwing340</a><br><a id="more"></a></p>
 <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>在郊区有 N 座通信基站，P 条 双向 电缆，第 i 条电缆连接基站Ai和Bi。</p>
 <p>特别地，1 号基站是通信公司的总站，N 号基站位于一座农场中。</p>
 <p>现在，农场主希望对通信线路进行升级，其中升级第 i 条电缆需要花费Li。</p>
@@ -400,9 +398,7 @@
 <p>若1号基站与N号基站之间不存在路径，则输出”-1”。</p>
 <h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>0≤K&lt;N≤1000,<br>1≤P≤10000,<br>1≤Li≤1000000</p>
 <h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">5 7 1</span><br><span class="line">1 2 5</span><br><span class="line">3 1 4</span><br><span class="line">2 4 8</span><br><span class="line">3 2 3</span><br><span class="line">5 2 9</span><br><span class="line">3 4 7</span><br><span class="line">4 5 6</span><br></pre></td></tr></table></figure>
-
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
-
 <h3 id="题意分析"><a href="#题意分析" class="headerlink" title="题意分析"></a>题意分析</h3><p>求从1到N的所有路径中 第k+1大的边最小的那条路径的第k+1大的边的权值</p>
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>枚举所有可能的答案，因为边的权值的范围为<code>[1,1000000]</code>，所以答案的可能值在该区间中。<br>二分：对于任意的 <code>1≤t≤1000000</code> , 我们设权值大于<code>t</code>的边的权值为<code>1</code>，权值小于<code>t</code>的边的权值为<code>0</code>，并通过双端队列，将边权为<code>0</code>的边放在队头，边权为<code>1</code>的边放在队尾(因为只用考虑第<code>k+1</code>大的边，所以比第比它小的边的权值可以忽略不计)，对于给定的<code>t</code>，求出的<code>dist[n]</code>的值如果小于或等于<code>k</code>，说明路径中比<code>t</code>大的元素个数小于等于<code>k</code>，则此时免费的边数还不足<code>k</code>或等于<code>k</code>，显然还可以减免用的不够充分，所以最终答案<code>res&lt;=t</code><br>,故将<code>r</code>的值更新为<code>mid</code>，反之，若<code>dist[n]</code>的值大于<code>k</code>，说明假设的减免的边数超过了<code>k</code>个，则小于等于当前答案的部分不符合要求，将<code>l</code>的值更新为<code>mid+1</code></p>
 <p>本题二分时将枚举范围改为<code>[0,1000001]</code>，<code>0</code>表明所有的边的花费都可以减免，<code>1000001</code>用于区分<code>1000000</code>，因为若<code>1</code>与<code>n</code>之间不存在路径，最终也会二分缩小到<code>100000</code>这个值，无法确定<code>1000000</code>是否为最终答案，但<code>1000001</code>的加入保证了若<code>1</code>与<code>n</code>之间不存在路径，最终答案会落入<code>1000001</code></p>
@@ -531,7 +527,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -553,7 +549,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1106,6 +1102,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

@@ -382,9 +382,7 @@
       
 
       
-        <p>原题链接：<a href="https://www.acwing.com/problem/content/167/" target="_blank" rel="noopener">Acwing165</a></p>
-<a id="more"></a>
-
+        <p>原题链接：<a href="https://www.acwing.com/problem/content/167/" target="_blank" rel="noopener">Acwing165</a><br><a id="more"></a></p>
 <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>翰翰和达达饲养了N只小猫，这天，小猫们要去爬山。</p>
 <p>经历了千辛万苦，小猫们终于爬上了山顶，但是疲倦的它们再也不想徒步走下山了（呜咕&gt;_&lt;）。</p>
 <p>翰翰和达达只好花钱让它们坐索道下山。</p>
@@ -396,9 +394,7 @@
 <h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出一个整数，表示最少需要多少美元，也就是最少需要多少辆缆车。</p>
 <h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤N≤18,<br>1≤Ci≤W≤1E8</p>
 <h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5 1996</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">1994</span><br><span class="line">12</span><br><span class="line">29</span><br></pre></td></tr></table></figure>
-
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
-
 <h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.将猫的体重从大到小排序</span><br><span class="line">2.如果当前答案大于已知最小答案则立即回溯</span><br></pre></td></tr></table></figure>
 <p>代码</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, w, res = <span class="number">30</span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">20</span>], a[<span class="number">20</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> cur, <span class="keyword">int</span> cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (res &lt;= cnt) <span class="comment">//剪枝2</span></span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (cur == n)</span><br><span class="line">	&#123;</span><br><span class="line">		res = min(res, cnt);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= cnt; i++)<span class="comment">//遍历所有的车</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (f[i] + a[cur] &lt;= w)</span><br><span class="line">		&#123;</span><br><span class="line">			f[i] += a[cur];</span><br><span class="line">			dfs(cur + <span class="number">1</span>, cnt);</span><br><span class="line">			f[i] -= a[cur];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//未返回说明当前车不够，需再加车</span></span><br><span class="line">	f[cnt + <span class="number">1</span>] = a[cur];</span><br><span class="line">	dfs(cur + <span class="number">1</span>, cnt + <span class="number">1</span>);</span><br><span class="line">	f[cnt + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; w;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	sort(a, a + n, cmp);<span class="comment">//剪枝1</span></span><br><span class="line">	dfs(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; res + <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -432,8 +428,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/17/ac166/" rel="next" title="数独 acwing 166">
-                <i class="fa fa-chevron-left"></i> 数独 acwing 166
+              <a href="/2020/02/17/ac170/" rel="next" title="加成序列 acwing 170">
+                <i class="fa fa-chevron-left"></i> 加成序列 acwing 170
               </a>
             
           </div>
@@ -442,8 +438,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/17/ac164/" rel="prev" title="可达性统计 acwing 164">
-                可达性统计 acwing 164 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/02/17/ac166/" rel="prev" title="数独 acwing 166">
+                数独 acwing 166 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -523,7 +519,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -545,7 +541,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1098,6 +1094,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

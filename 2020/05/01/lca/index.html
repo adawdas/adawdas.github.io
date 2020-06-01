@@ -384,9 +384,7 @@
       
 
       
-        <p>求最近公共祖先的几种算法</p>
-<a id="more"></a>
-
+        <p>求最近公共祖先的几种算法<br><a id="more"></a></p>
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><code>LCA</code>（Least Common Ancestors），即最近公共祖先，指对于有根树 <code>TT</code> 的两个结点 <code>uu</code> 、<code>vv</code> ，最近公共祖先 <code>LCA(T,u,v)</code> <code>LCA(T,u,v)</code> 表示一个结点 <code>xx</code>, 满足 <code>xx</code> 是 <code>uu</code>、<code>vv</code> 的祖先且 <code>xx</code> 的深度尽可能大。</p>
 <h2 id="倍增法"><a href="#倍增法" class="headerlink" title="倍增法"></a>倍增法</h2><h3 id="暴力求解lca"><a href="#暴力求解lca" class="headerlink" title="暴力求解lca"></a>暴力求解lca</h3><p>首先遍历一遍树，并求出所有节点的深度及其父节点</p>
 <p>对于查询<code>lca(u,v)</code>,我们假定<code>depth[u]&gt;depth[v]</code>,那么我可以首先将节点<code>u</code>沿着其父节点路径向上走，直到它的深度和节点<code>v</code>相同</p>
@@ -397,7 +395,6 @@
 <p>原因在于我们的初始化方式，我们将根节点设为<code>1</code>，非法跳到根以上的节点全都是<code>0</code>（如<code>fa[3][2]</code>(以层次遍历顺序为<code>123……n</code>建树的节点<code>3</code>的第<code>4</code>个祖先节点),显然是非法的，我们在初始化的时候也并不会初始化到这个值，它的值就为默认值<code>0</code>）</p>
 <p>以这样的方式跳变之后，它们一定会到达的<code>lca</code>的下一层(模拟一下即可)<br>此时它们的<code>lca</code>就是<code>fa[u][0]</code>,也是<code>fa[v][0]</code></p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(depth, <span class="number">0x3f</span>, <span class="keyword">sizeof</span>(depth));</span><br><span class="line">    <span class="keyword">int</span> hh = <span class="number">0</span>, tt = <span class="number">0</span>;</span><br><span class="line">    q[<span class="number">0</span>] = root;</span><br><span class="line">    depth[root] = <span class="number">1</span>;</span><br><span class="line">    depth[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(hh&lt;=tt)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> t = q[hh++];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = h[t]; ~i;i=ne[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> j = e[i];</span><br><span class="line">            <span class="keyword">if</span>(depth[j]&gt;depth[t]+<span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                depth[j] = depth[t] + <span class="number">1</span>;</span><br><span class="line">                fa[j][<span class="number">0</span>] = t;</span><br><span class="line">                q[++tt] = j;</span><br><span class="line">				<span class="comment">//递推fa数组</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= maxdepth;k++)</span><br><span class="line">                    fa[j][k] = fa[fa[j][k - <span class="number">1</span>]][k - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(depth[a]&lt;depth[b])<span class="comment">//默认a比b深</span></span><br><span class="line">        swap(a, b);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = maxdepth; k &gt;= <span class="number">0</span>;k--)</span><br><span class="line">        <span class="keyword">if</span>(depth[fa[a][k]]&gt;=depth[b])</span><br><span class="line">            a = fa[a][k];</span><br><span class="line">    <span class="keyword">if</span>(a==b)</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = maxdepth; k &gt;= <span class="number">0</span>;k--)</span><br><span class="line">        <span class="keyword">if</span>(fa[a][k]!=fa[b][k])</span><br><span class="line">        &#123;</span><br><span class="line">            a = fa[a][k];</span><br><span class="line">            b = fa[b][k];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> fa[a][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="Tarjan算法"><a href="#Tarjan算法" class="headerlink" title="Tarjan算法"></a>Tarjan算法</h2><h3 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h3><p>进行一遍<code>dfs</code>（中序遍历），假设有询问<code>lca(u,v)</code>,对于节点<code>u</code>，看一下<code>v</code>是否在之前被遍历到了，如果<code>v</code>在<code>u</code>之前被遍历到，那么查询<code>v</code>此时的已经遍历到的根<code>root</code>，此时这个<code>root</code>即为<code>lca(u,v)</code><br>原因：用树的方式思考，因为是中序遍历，访问顺序为左-&gt;根-&gt;右，<code>v</code>在<code>u</code>之前被遍历到，有<code>3</code>种情况<br>1.存在一棵树，<code>u</code>在其左子树，<code>v</code>在其右子树<br>2.存在一棵树，<code>u</code>在其左子树，<code>v</code>在其根<br>3.存在一棵树，<code>u</code>在其根，<code>v</code>在其右子树<br>对于以上三种情况，<code>u</code>的根一定会被压缩到<code>lca(u,v)</code></p>
 <h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>已知有树如下所示</p>
 <p><img src="/images/lca.png" alt="alt"></p>
@@ -405,8 +402,6 @@
 <p>首先遍历到<code>5</code>,此时查看<code>5</code>的所有查询，发现<code>3</code>，<code>6</code>均未被访问<br>访问到<code>2</code>，<code>p[5]&lt;-2</code><br>访问到<code>6</code>，发现<code>5</code>被访问过，此时<code>p[5]=2</code>,故<code>lca(5,6)=2</code><br>回溯到<code>2</code>，<code>p[6]&lt;-2</code><br>回溯到<code>1</code>，<code>p[2]&lt;-1</code>,路径压缩<code>p[5]&lt;-1,p[6]&lt;-1</code></p>
 <p>访问到<code>3</code>，发现<code>5</code>被访问过，此时<code>p[5]=1</code>,故<code>lca(5,3)=1</code></p>
 <h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x==p[x])</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> p[x] = find(p[x]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = h[u]; ~i;i=ne[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> j = e[i];</span><br><span class="line">        <span class="keyword">if</span>(j==fa)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        dist[j] = dist[u] + w[i];</span><br><span class="line">        dfs(j, u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    st[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = h[u]; ~i;i=ne[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> j = e[i];</span><br><span class="line">        <span class="keyword">if</span>(!st[j])</span><br><span class="line">        &#123;</span><br><span class="line">            tarjan(j);</span><br><span class="line">            p[j] = u;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> t:query[u])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x = t.first;</span><br><span class="line">        <span class="keyword">int</span> id = t.second;</span><br><span class="line">        <span class="keyword">if</span>(st[x]==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> lca = find(x);</span><br><span class="line">			res[id]=lca;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    st[u] = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 
       
     </div>
@@ -446,6 +441,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/06/ac1174/" rel="prev" title="受欢迎的牛 acwing 1174">
+                受欢迎的牛 acwing 1174 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -524,7 +523,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -546,7 +545,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1099,6 +1098,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

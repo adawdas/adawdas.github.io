@@ -382,9 +382,7 @@
       
 
       
-        <p>原题链接：<a href="https://www.acwing.com/problem/content/130/" target="_blank" rel="noopener">Acwing128</a></p>
-<a id="more"></a>
-
+        <p>原题链接：<a href="https://www.acwing.com/problem/content/130/" target="_blank" rel="noopener">Acwing128</a><br><a id="more"></a></p>
 <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>你将要实现一个功能强大的整数序列编辑器。</p>
 <p>在开始时，序列是空的。</p>
 <p>编辑器共有五种指令，如下：</p>
@@ -394,12 +392,8 @@
 <h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>每一个“Q k”指令，输出一个整数作为结果，每个结果占一行</p>
 <h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤Q≤106,<br>|x|≤103,<br>1≤k≤n</p>
 <h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">I 2</span><br><span class="line">I -1</span><br><span class="line">I 1</span><br><span class="line">Q 3</span><br><span class="line">L</span><br><span class="line">D</span><br><span class="line">R</span><br><span class="line">Q 2</span><br></pre></td></tr></table></figure>
-
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
 <h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在光标左侧和右侧分别建立一个栈，L操作对应于将左侧栈顶元素弹出并加入</span><br><span class="line">到右侧栈，R操作反之，每次在左侧栈中加入元素(L 或 l x 操作)都要计算</span><br><span class="line">一下当前的和</span><br></pre></td></tr></table></figure>
-
-
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1E6</span> + <span class="number">10</span>;</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; p, q;</span><br><span class="line"><span class="keyword">int</span> sum[N], f[N], n, v;</span><br><span class="line"><span class="keyword">char</span> a;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	f[<span class="number">0</span>] = <span class="number">-1e7</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a;</span><br><span class="line">		<span class="keyword">if</span> (a == <span class="string">'L'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (!p.empty())</span><br><span class="line">			&#123;</span><br><span class="line">				q.push(p.top());</span><br><span class="line">				p.pop();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'R'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (!q.empty())</span><br><span class="line">			&#123;</span><br><span class="line">				p.push(q.top());</span><br><span class="line">				q.pop();</span><br><span class="line">				sum[p.size()] = sum[p.size() - <span class="number">1</span>] + p.top();</span><br><span class="line">				f[p.size()] = max(f[p.size() - <span class="number">1</span>], sum[p.size()]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'D'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (!p.empty())</span><br><span class="line">				p.pop();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'I'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; v;</span><br><span class="line">			p.push(v);</span><br><span class="line">			sum[p.size()] = sum[p.size() - <span class="number">1</span>] + p.top();</span><br><span class="line">			f[p.size()] = max(f[p.size() - <span class="number">1</span>], sum[p.size()]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="string">'Q'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; v;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; f[v] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
@@ -431,8 +425,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/17/ac138/" rel="next" title="兔子与兔子 acwing 138">
-                <i class="fa fa-chevron-left"></i> 兔子与兔子 acwing 138
+              <a href="/2020/02/17/ac139/" rel="next" title="回文子串的最大长度 acwing 139">
+                <i class="fa fa-chevron-left"></i> 回文子串的最大长度 acwing 139
               </a>
             
           </div>
@@ -522,7 +516,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -544,7 +538,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1097,6 +1091,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

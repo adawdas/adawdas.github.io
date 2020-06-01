@@ -382,9 +382,7 @@
       
 
       
-        <p>原题链接：<a href="https://www.acwing.com/problem/content/290/" target="_blank" rel="noopener">Acwing288</a></p>
-<a id="more"></a>
-
+        <p>原题链接：<a href="https://www.acwing.com/problem/content/290/" target="_blank" rel="noopener">Acwing288</a><br><a id="more"></a></p>
 <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>在某个星球上，一天由 N 个小时构成，我们称0点到1点为第1个小时、1点到2点为第2个小时，以此类推。</p>
 <p>在第 i 个小时睡觉能够恢复Ui点体力。</p>
 <p>在这个星球上住着一头牛，它每天要休息B个小时。</p>
@@ -397,9 +395,7 @@
 <h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出一个整数，表示恢复的体力值。</p>
 <h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>3≤N≤3830<br>2≤B&lt;N<br>0≤Ui≤200000</p>
 <h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5 3</span><br><span class="line">2</span><br><span class="line">0</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
-
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6</span><br></pre></td></tr></table></figure>
-
 <h3 id="样例解释"><a href="#样例解释" class="headerlink" title="样例解释"></a>样例解释</h3><p>这头牛每天3点入睡，睡到次日1点，即[1,4,2]时间段休息，每天恢复体力值最大，为0+4+2=6。</p>
 <h3 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h3><p><code>f[i][j][0]</code>表示第i小时一共睡了j小时且第i小时没有在睡觉的集合<br><code>f[i][j][1]</code>表示第i小时一共睡了j小时且第i小时在睡觉的集合<br>易得状态转移方程<br><code>f[i][j][0]=max(f[i-1][j][0],f[i-1][j][1])</code><br><code>f[i][j][1]=max(f[i-1][j-1][0],f[i-1][j-1][1]+w[i])</code></p>
 <p>为了区分是否跨越了一天，这里对第N小时的情况进行了划分：<br>若第N小时在睡觉，同时第1小时在睡觉，那么第一小时可以恢复体力<br>其余情况下第一小时均不可恢复体力<br>故有初始状态为<br><code>f[1][0][0]=0,f[1][1][1]=0</code> (第N小时没有睡觉)<br><code>f[1][0][0]=0,f[1][1][1]=w[i]</code> (第N小时在睡觉)</p>
@@ -527,7 +523,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -549,7 +545,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1102,6 +1098,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

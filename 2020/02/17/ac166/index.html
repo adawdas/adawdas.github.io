@@ -384,9 +384,7 @@
       
 
       
-        <p>原题链接：<a href="https://www.acwing.com/problem/content/168/" target="_blank" rel="noopener">Acwing166</a></p>
-<a id="more"></a>
-
+        <p>原题链接：<a href="https://www.acwing.com/problem/content/168/" target="_blank" rel="noopener">Acwing166</a><br><a id="more"></a></p>
 <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>数独是一种传统益智游戏，你需要把一个9 × 9的数独补充完整，使得图中每行、每列、每个3 × 3的九宫格内数字1~9均恰好出现一次。</p>
 <p>请编写一个程序填写数独。</p>
 <p><img src="/images/shudu.png" alt="alt"></p>
@@ -397,14 +395,9 @@
 <p>文件结尾处为包含单词“end”的单行，表示输入结束。</p>
 <h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>每个测试用例，输出一行数据，代表填充完全后的数独。</p>
 <h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.2738..1..1...6735.......293.5692.8...........6.1745.364.......9518...7..8..6534.</span><br><span class="line">......52..8.4......3...9...5.1...6..2..7........3.....6...1..........7.4.......3.</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">527389416819426735436751829375692184194538267268174593643217958951843672782965341</span><br><span class="line">416837529982465371735129468571298643293746185864351297647913852359682714128574936</span><br></pre></td></tr></table></figure>
-
 <h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.优化搜索顺序，每次找可选数字最少的位置填数</span><br></pre></td></tr></table></figure>
-
-<p>###优化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.位运算，通过位运算&amp; 可以方便求出当前位置可填的数</span><br><span class="line">2.lowbit可取出当前位的可能填的数</span><br></pre></td></tr></table></figure>
-
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.位运算，通过位运算&amp; 可以方便求出当前位置可填的数</span><br><span class="line">2.lowbit可取出当前位的可能填的数</span><br></pre></td></tr></table></figure>
 <p>代码</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[<span class="number">1</span> &lt;&lt; N], ones[<span class="number">1</span> &lt;&lt; N];</span><br><span class="line"><span class="keyword">int</span> row[N], col[N], cell[<span class="number">3</span>][<span class="number">3</span>];</span><br><span class="line"><span class="keyword">char</span> str[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x &amp; (-x);  <span class="comment">//返回最低位的1 ，如1011100返回100</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> row[x] &amp; col[y] &amp; cell[x / <span class="number">3</span>][y / <span class="number">3</span>];<span class="comment">//求出当前位置能填的数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span><span class="comment">//初始化，将每位都初始化为1</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		row[i] = (<span class="number">1</span> &lt;&lt; N) - <span class="number">1</span>;</span><br><span class="line">		col[i] = (<span class="number">1</span> &lt;&lt; N) - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)</span><br><span class="line">			cell[i][j] = (<span class="number">1</span> &lt;&lt; N) - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (cnt == <span class="number">0</span>)<span class="comment">//填完所有的数</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">int</span> mins = <span class="number">10</span>, x, y;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)<span class="comment">//找出可填数最少的位置</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (str[i * <span class="number">9</span> + j] == <span class="string">'.'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> t = get(i, j);</span><br><span class="line">				<span class="keyword">int</span> s = ones[t];</span><br><span class="line">				<span class="keyword">if</span> (s &lt; mins)</span><br><span class="line">				&#123;</span><br><span class="line">					mins = s;</span><br><span class="line">					x = i;</span><br><span class="line">					y = j;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = get(x, y); i; i -= lowbit(i))<span class="comment">//遍历所有可填的数</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> t = lowbit(i);</span><br><span class="line">		row[x] -= t;</span><br><span class="line">		col[y] -= t;</span><br><span class="line">		cell[x / <span class="number">3</span>][y / <span class="number">3</span>] -= t;</span><br><span class="line">		str[x * <span class="number">9</span> + y] = <span class="string">'1'</span> + <span class="built_in">map</span>[t];</span><br><span class="line">		<span class="keyword">if</span> (dfs(cnt - <span class="number">1</span>)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		row[x] += t;</span><br><span class="line">		col[y] += t;</span><br><span class="line">		cell[x / <span class="number">3</span>][y / <span class="number">3</span>] += t;</span><br><span class="line">		str[x * <span class="number">9</span> + y] = <span class="string">'.'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">		<span class="built_in">map</span>[<span class="number">1</span> &lt;&lt; i] = i;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1</span> &lt;&lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i; j; j -= lowbit(j))</span><br><span class="line">		&#123;</span><br><span class="line">			s++;</span><br><span class="line">		&#125;</span><br><span class="line">		ones[i] = s;<span class="comment">//统计每个数中1的个数</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; str, str[<span class="number">0</span>] != <span class="string">'e'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		init();</span><br><span class="line">		<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> t = i * <span class="number">9</span> + j;</span><br><span class="line">				<span class="keyword">if</span> (str[t] != <span class="string">'.'</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">int</span> b = str[t] - <span class="string">'1'</span>;<span class="comment">//将该为变为0</span></span><br><span class="line">					row[i] -= (<span class="number">1</span> &lt;&lt; b);</span><br><span class="line">					col[j] -= (<span class="number">1</span> &lt;&lt; b);</span><br><span class="line">					cell[i / <span class="number">3</span>][j / <span class="number">3</span>] -= (<span class="number">1</span> &lt;&lt; b);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">				&#123;</span><br><span class="line">					cnt++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		dfs(cnt);</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -437,8 +430,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/17/ac170/" rel="next" title="加成序列 acwing 170">
-                <i class="fa fa-chevron-left"></i> 加成序列 acwing 170
+              <a href="/2020/02/17/ac165/" rel="next" title="小猫爬山 acwing 165">
+                <i class="fa fa-chevron-left"></i> 小猫爬山 acwing 165
               </a>
             
           </div>
@@ -447,8 +440,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/17/ac165/" rel="prev" title="小猫爬山 acwing 165">
-                小猫爬山 acwing 165 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/02/17/ac164/" rel="prev" title="可达性统计 acwing 164">
+                可达性统计 acwing 164 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -528,7 +521,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -550,7 +543,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -583,7 +576,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出格式"><span class="nav-number">3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入样例："><span class="nav-number">4.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出样例："><span class="nav-number">5.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#剪枝"><span class="nav-number">6.</span> <span class="nav-text">剪枝</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出格式"><span class="nav-number">3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入样例："><span class="nav-number">4.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出样例："><span class="nav-number">5.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#剪枝"><span class="nav-number">6.</span> <span class="nav-text">剪枝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化"><span class="nav-number">7.</span> <span class="nav-text">优化</span></a></li></ol></div>
             
 
           </div>
@@ -1103,6 +1096,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

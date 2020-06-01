@@ -382,9 +382,7 @@
       
 
       
-        <p>原题链接：<a href="https://www.acwing.com/problem/content/192/" target="_blank" rel="noopener">Acwing190</a></p>
-<a id="more"></a>
-
+        <p>原题链接：<a href="https://www.acwing.com/problem/content/192/" target="_blank" rel="noopener">Acwing190</a><br><a id="more"></a></p>
 <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>已知有两个字串 A, B 及一组字串变换的规则（至多6个规则）:</p>
 <p>A1 -&gt; B1<br>A2 -&gt; B2<br>…</p>
 <p>规则的含义为：在 A 中的子串 A1 可以变换为 B1、A2 可以变换为 B2 …。</p>
@@ -394,19 +392,14 @@
 <p>则此时，A 可以经过一系列的变换变为 B，其变换的过程为：</p>
 <p>‘abcd’-&gt;‘xud’-&gt;‘xy’-&gt;‘xyz’</p>
 <p>共进行了三次变换，使得 A 变换为B。</p>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>A B<br>A1 B1 <br>A2 B2 |-&gt; 变换规则<br>… … /<br>所有字符串长度的上限为 20。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>A B<br>A1 B1 \<br>A2 B2 |-&gt; 变换规则<br>… … /<br>所有字符串长度的上限为 20。</p>
 <h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>若在 10 步（包含 10步）以内能将 A 变换为 B ，则输出最少的变换步数；否则输出”NO ANSWER!”</p>
 <h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">abcd xyz</span><br><span class="line">abc xu</span><br><span class="line">ud y</span><br><span class="line">y yz</span><br></pre></td></tr></table></figure>
-
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3</span><br></pre></td></tr></table></figure>
-
-
-
 <h3 id="双向bfs"><a href="#双向bfs" class="headerlink" title="双向bfs"></a>双向bfs</h3><p>最坏情况下，搜到第十层，那么搜索空间是 <code>6^10</code>，这将直接<code>TLE/MLE</code><br>但如果采用双向<code>BFS</code>的方法，起点与终点将会在中点相遇，<br>这时从起点搜索和从终点搜索的空间各为 <code>6^5</code>，剪枝效果很好</p>
 <p>优化双向<code>bfs</code>：<br>每次选择起点和终点的队列中元素较少的那个队列进行扩展</p>
 <p>时间复杂度：<br>由于<code>bfs</code>中，空间中的每种状态只会被遍历一次<br>设字符串长度为<code>L</code>，起点决策数为<code>L</code>个时间复杂度为<code>O((LN)^5)</code></p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">6</span>;</span><br><span class="line"><span class="built_in">string</span> a[N], b[N];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">extend</span><span class="params">(<span class="built_in">queue</span>&lt;<span class="built_in">string</span>&gt;&amp;q,<span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;&amp;da,<span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;&amp;db,<span class="built_in">string</span> a[],<span class="built_in">string</span> b[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> t = q.front();</span><br><span class="line">    q.pop();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t.size();i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(t.substr(i,a[j].size())!=a[j])</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">//substr()第二个参数不填则默认为截取到终点</span></span><br><span class="line">            <span class="built_in">string</span> r = t.substr(<span class="number">0</span>, i) + b[j] + t.substr(i + a[j].size());</span><br><span class="line">            <span class="keyword">if</span>(db.count(r))</span><br><span class="line">                <span class="keyword">return</span> da[t] + db[r] + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(da.count(r))</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            da[r] = da[t] + <span class="number">1</span>;</span><br><span class="line">            q.push(r);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">(<span class="built_in">string</span> A,<span class="built_in">string</span> B)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="built_in">string</span>&gt; qa, qb;</span><br><span class="line">    qa.push(A);</span><br><span class="line">    qb.push(B);</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; da, db;</span><br><span class="line">    da[A] = <span class="number">0</span>;</span><br><span class="line">    db[B] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(qa.size()&amp;&amp;qb.size())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(da[qa.front()]+db[qb.front()]&gt;<span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">11</span>;</span><br><span class="line">        <span class="keyword">int</span> t;</span><br><span class="line">        <span class="keyword">if</span>(qa.size()&gt;qb.size())</span><br><span class="line">            t = extend(qa, da, db, a, b);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            t = extend(qb, db, da, b, a);</span><br><span class="line">        <span class="keyword">if</span>(t!=<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">return</span> t;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">11</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> A, B;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;a[n]&gt;&gt;b[n])</span><br><span class="line">        n++;</span><br><span class="line">    <span class="keyword">int</span> res = bfs(A, B);</span><br><span class="line">    <span class="keyword">if</span>(res&gt;<span class="number">10</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"NO ANSWER!\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -528,7 +521,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -550,7 +543,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1103,6 +1096,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
