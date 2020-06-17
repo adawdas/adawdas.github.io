@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>树状数组</title>
+    <url>/2020/06/14/shuzhuangsz/</url>
+    <content><![CDATA[<p>树状数组<br><a id="more"></a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>树状数组的基本用途是维护序列的前缀和。对于给定的序列\(a\)，我们建立一个数组\(c\)，其中\(c[x]\)保存序列a的区间\([x-lowbit(x)+1,x]\)中所有数的和，即 \(\sum_{i=x-lowbit(x)+1}^{x}a[i]\)。<br>树状数组可以看成是下图中的树形结构，图中最下面一行是\(N\)个叶节点，代表数值\(a[1-N]\)<br>满足以下的性质：<br>1.每个内部节点\(c[x]\)保存以它为根的子树中所有叶节点的和。<br>2.每个内部节点\(c[x]\)的子节点个数等于\(lowbit(x)\)的位数。<br>3.除树根外，每个内部节点\(c[x]\)的父节点是\(c[x+lowbit(x)]\)<br>4.树的深度为\(O(logN)\)<br><img src="/images/shuzhuangsz.png" alt="alt"></p>
+<h2 id="功能模板"><a href="#功能模板" class="headerlink" title="功能模板"></a>功能模板</h2><h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><p>单点增加与区间查询</p>
+<p>单点增加<br>单点增加，即给\(a[x]\)增加\(y\)，同时正确地维护前缀和</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (; x &lt;= n; x += lowbit(x))</span><br><span class="line">		c[x] += y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>区间查询<br>区间查询，即查询序列\(a[l]-a[r]\)的和<br>方法：求出\(x\)的二进制表示中每个等于\(1\)的位，把\([1-x]\)分成\(O(logN)\)个小区间，而每个小区间的区间和都已经保存在了数组\(c\)中，求出每一段的和相加即可<br>若要求\([l-r]\)中所有数的和，只需要计算\(ask(r)-ask(l-1)\)</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (; x; x -= lowbit(x))</span><br><span class="line">		res += c[x];</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于查询区间\([l-r]\)<br>输出结果: \(ask(r)-ask(l-1)\)</p>
+<h3 id="拓展一"><a href="#拓展一" class="headerlink" title="拓展一"></a>拓展一</h3><p>区间增加与单点查询</p>
+<p>区间增加，即把数列中\(l-r\)个数都加上\(d\)<br>单点查询，即查询元素\(a[x]\)的值</p>
+<p>由于树状数组仅支持区间增加和单点查询，所有需要做出转化来解决问题</p>
+<p>方法：<br>新建一个数组\(b\)，若在\([l-r]\)区间增加了\(d\)，则对\(b\)进行如下操作<br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">add(l,d);</span><br><span class="line">add(r+<span class="number">1</span>,-d);</span><br></pre></td></tr></table></figure><br>如此以后，我们考虑\(b\)数组前缀和的情况<br>\(1\le x \lt l \),前缀和不变<br>\(l\le x\le r \),前缀和增加d<br>\(r \lt x\le l \),前缀和不变<br>如此，b数组就反映了区间增加对于a数组产生的影响</p>
+<p>此处，我们将区间增加操作转化为两个单点增加操作</p>
+<p>对于查询 a[x]<br>输出结果 a[x]+ask(x)</p>
+<h3 id="拓展二"><a href="#拓展二" class="headerlink" title="拓展二"></a>拓展二</h3><p>区间增加与区间查询</p>
+<p>区间增加，即把数列中\(l-r\)个数都加上\(d\)<br>单点查询，即查询元素\(a[l]-a[r]\)的和</p>
+<p>对于区间增加操作，在拓展一中已经实现，故只需再实现区间查询操作即可<br>由，拓展一，b数组反映了维护指令的累积影响<br>所以\(\sum<em>{i=1}^x a[i]\)<br>所以序列a[1-x]累计得到的影响为\(\sum</em>{i=1}^x\) \(\sum<em>{j=1}^i b[j]\) = \(\sum</em>{i=1}^x (x-i+1) \ast b[i]\) = \((x+1)\) \(sum<em>{i=1}^x b[i]\) - \(\sum</em>{i=1}^x i \ast b[i]\)</p>
+<p>用树状数组分别维护两个数组 \(b[i]\) 和 \(i \ast b[i]\)即可</p>
+<p>定义如下函数<br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getpre</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ask(c1, x) * (x + <span class="number">1</span>) - ask(c2, x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>\((x+1)\) \(sum<em>{i=1}^x b[i]\) - \(\sum</em>{i=1}^x i \ast b[i]\) 表示的是指令对于a[1-x]的影响</p>
+<p>则 \(getpre(r) - getpre(l-1)\)表示的是指令对于\(a[l-r]\)的影响</p>
+<p>对于查询 \(a[l-r]\)</p>
+<p>若\(b\)数组初始化为\(0\)，则需定义数组\(s\)存储\(a\)的前缀和<br>输出 \(s[r] - s[l-1] + getpre(r) - getpre(l - 1)\)</p>
+<p>若将\(b\)数组初始化为\(a\)数组的差分，则无需定义\(s\)<br>输出 \(getpre(r) - getpre(l - 1)\) 即可</p>
+]]></content>
+      <categories>
+        <category>代码模板</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>度的数量 acwing 1081</title>
     <url>/2020/06/01/ac1081/</url>
     <content><![CDATA[<p>原题链接：<a href="https://www.acwing.com/problem/content/1083/" target="_blank" rel="noopener">Acwing1081</a><br><a id="more"></a></p>
